@@ -8,7 +8,7 @@
 #' @param cofactor The cofactor for the scaling. This could be any number >0:Inf.
 #'
 #' @return Returns a \code{data.frame} with the scaled data.
-#' @export t_asinh()
+#' @export
 t_asinh <- function(df, cofactor = 5) {
     nums <- vapply(df, is.numeric, FUN.VALUE = logical(1)) # only operates in numeric
     df[,nums] <- asinh(df[,nums]/cofactor)
@@ -35,7 +35,7 @@ t_asinh <- function(df, cofactor = 5) {
 #' @param f_list If \code{SpecifyList=TRUE}, this should be a vector of file names.
 #'
 #' @return Returns a \code{list} of \code{data.frames} of the extracted data.
-#' @export extract_data()
+#' @export
 extract_data <- function (file_type = '.fcs|.FCS',
                           sampling = FALSE, sample_size = 10, 
                           SpecifyList = FALSE, f_list) {

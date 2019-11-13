@@ -12,7 +12,7 @@
 #' @param opt_idx A vector with the column indexes for the optional markers.
 #'
 #' @return Returns a \code{data.frame} with the invalid events already removed.
-#' @export rm_zeros()
+#' @export
 rm_zeros <- function (df, mand_idx, opt_idx, ...){
         mand <- c()
         for (i in 1:length(mand_idx)){
@@ -51,7 +51,7 @@ rm_zeros <- function (df, mand_idx, opt_idx, ...){
 #'
 #' @return Returns a \code{data.frame} with n=\code{sample_size} rows per class
 #'         randomly sampled.
-#' @export BalancedSample()
+#' @export 
 BalancedSample <- function(df, sample_size = 5000, class_col = class_col){
     idx <- c(sample(which(df[class_col] == 1), sample_size, replace = T), #noise/beads
              sample(which(df[class_col] == 0), sample_size, replace = T)) #cells
@@ -72,7 +72,7 @@ BalancedSample <- function(df, sample_size = 5000, class_col = class_col){
 #' @param s_train Numeric. The size of the training set. Any value between (0:1)
 #' 
 #' @return A random subset of \code{data.frame}s as a \code{list}.
-#' @export TrainSetList()
+#' @export
 TrainSetList <- function(dt_ls, s_train = 0.75) {
     train_size <- round(length(dt_ls)*s_train)
     dt_train <- sample(dt_ls, train_size)
@@ -93,7 +93,7 @@ TrainSetList <- function(dt_ls, s_train = 0.75) {
 #' @param label A character vector with the prefix of the RData file to be outputted.
 #' @param class_col A character vector with the name of the column that identify 
 #'        the classes.
-#' @export TrainTest()
+#' @export
 TrainTest <- function(dt_ls, output_path = output_path, label = label, 
     class_col = class_col){
     dt_train <- TrainSetList(dt_ls)
@@ -130,7 +130,7 @@ TrainTest <- function(dt_ls, output_path = output_path, label = label,
 #'
 #' @return Returns a \code{data.frame} with the original class labels converted
 #'         into factors.
-#' @export ClassVarToFactor()
+#' @export
 ClassVarToFactor <- function(df, class_col = class_col, name_0 = name_0, 
   name_1 = name_1) {
   idx_0 <- which(df[class_col] == 0)
@@ -166,7 +166,7 @@ ClassVarToFactor <- function(df, class_col = class_col, name_0 = name_0,
 #' @param allowParallel Logical. If \code{TRUE} allows parallel computation.
 #' @param free_cores A numeric vector with the number of cores to be left free 
 #'        if \code{allowParallel=TRUE}'.
-#' @export TrainModel()
+#' @export 
 TrainModel <- function(TrainSet, TestSet, alg = c('all', 'RF', 'XGB'), 
     class_col = class_col, seed = 40, name_0 = name_0, name_1 = name_1,
     label = label, allowParallel = TRUE, free_cores = 4){
@@ -333,7 +333,7 @@ TrainModel <- function(TrainSet, TestSet, alg = c('all', 'RF', 'XGB'),
 #' @param label A character vector with the name of the positive class. (e.g. 'beads')
 #'
 #' @return Returns a numeric vector with the row indexes of the positive class.
-#' @export predict_cl()
+#' @export
 predict_cl <- function(df, model = model, alg = c('RF', 'XGB'), 
   features = features, label = label){
     
