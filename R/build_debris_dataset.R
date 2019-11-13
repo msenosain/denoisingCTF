@@ -174,5 +174,5 @@ post_gate <- function (bsample = 5000, path_pregated = '../'){
     names(dt_ls) <- tools::file_path_sans_ext(basename(preg_flist)) 
 
     # Compute train/test sets
-    TrainTest(dt_ls, output_path = output_path, label = 'debris', sample_size = bsample)
+    TrainTest(dt_ls, output_path = output_path, label = 'debris', class_col = 'GP_Noise')
 }
