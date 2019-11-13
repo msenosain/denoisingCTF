@@ -1,4 +1,3 @@
-
 #' Arcsinh transformation 
 #'
 #' This function takes a data.frame and applies basic \code{asinh} function 
