@@ -12,6 +12,7 @@ Encoding: UTF-8
 LazyData: true
 Depends:
     R (>= 3.5.0)
+biocViews:
 Imports:
     dplyr,
     mclust,
