@@ -1,0 +1,31 @@
+Package: denoisingCTF
+Title: CyTOF Data Noise Removal
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Mafe",
+           family = "Senosain",
+           role = c("aut", "cre"),
+           email = "mariafernanda.senosain@vanderbilt.edu")
+Description: This package contains functions to build training models to clean CyTOF data, as well as a wrapper function that uses trained models to clean CyTOF data. Denoising occurs in two steps: 1. Beads removal, 2. Zeros and debris and dead cells removal.
+License: What license it uses
+Encoding: UTF-8
+LazyData: true
+Imports:
+    dplyr,
+    mclust,
+    randomForest,
+    psych,
+    flowCore,
+    tools,
+    tidyverse,
+    caret,
+    purrr,
+    gridExtra,
+    tibble,
+    magrittr,
+    xgboost,
+    cytofCore,
+    parallel,
+    doParallel,
+    foreach
+RoxygenNote: 7.0.0.9000
