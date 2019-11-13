@@ -61,33 +61,33 @@ rm_noise <- function(file_type = '.fcs|.FCS', rm_beads = TRUE, rm_debris = TRUE,
     cn <- as.matrix(paste0(col_nms, '_', descrp))
     if(rm_debris){
         print(cn)
-        prompt1 <- "Enter the column INDICES of the 'mandatory' markers (separated by single space only, no comas allowed) \n"
-        prompt2 <- "Enter the column INDICES of the 'optional' markers (separated by single space only, no comas allowed) \n"
+        prompt1 <- "Enter the column INDICES of the 'mandatory' markers 
+        (separated by single space only, no comas allowed) \n"
+        prompt2 <- "Enter the column INDICES of the 'optional' markers 
+        (separated by single space only, no comas allowed) \n"
         mand_idx <- as.numeric(strsplit(readline(prompt1), " ")[[1]])
         opt_idx <- as.numeric(strsplit(readline(prompt2), " ")[[1]])        
+    }
+
+
+    # channels to remove beads 
+    if(rm_beads){
+        #print(cn)
+        prompt <- "Enter the column INDICES of the beads channels Ce140, Eu151, 
+        Eu153, Ho165, Lu175 (separated by single space only, no comas allowed) \n"
+        ft_beads <- col_nms[as.numeric(strsplit(readline(prompt), " ")[[1]])]
     }
 
     # channels to remove debris
     if(rm_debris){
         #print(cn)
-        prompt <- "Enter the column INDICES of the gaussian parameters channels 'Event_length', 'Center', 'Offset', 'Residual', 'Width' (separated by single space only, no comas allowed) \n"
+        prompt <- "Enter the column INDICES of the gaussian parameters channels 
+        'Event_length', 'Center', 'Offset', 'Residual', 'Width' and intact-cells 
+        marker channel (separated by single space only, no comas allowed) \n"
         ft_debris <- col_nms[as.numeric(strsplit(readline(prompt), " ")[[1]])]
 
     }
 
-    # channels to remove beads 
-    if(rm_beads){
-        #print(cn)
-        prompt <- "Enter the column INDICES of the beads channels Ce140, Eu151, Eu153, Ho165, Lu175 (separated by single space only, no comas allowed) \n"
-        ft_beads <- col_nms[as.numeric(strsplit(readline(prompt), " ")[[1]])]
-    }
-
-    # channels to remove dead cells
-    if(rm_dcells){
-        #print(cn)
-        prompt <- "Enter the column INDICES for viability marker and live-cells marker \n"
-        ft_dcells <- col_nms[as.numeric(strsplit(readline(prompt), " ")[[1]])]
-    }
 
     # Iterate between files to remove noise
     for(i in 1:length(files_list)){
