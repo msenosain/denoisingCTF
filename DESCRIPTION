@@ -10,6 +10,9 @@ Description: This package contains functions to build training models to clean C
 License: What license it uses
 Encoding: UTF-8
 LazyData: true
+Depends:
+    R (>= 3.5.0)
+biocViews:
 Imports:
     dplyr,
     mclust,
