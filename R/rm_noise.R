@@ -134,7 +134,9 @@ rm_noise <- function(file_type = '.fcs|.FCS', rm_beads = TRUE, rm_debris = TRUE,
             '_noiseCL.csv')), row.names=FALSE)
         
         # remove k rows from dt
-        k <- unique(c(k1,k2))
+        k1 <- which(dt[,'beads'] ==1)
+        k2 <- which(dt[,'debris'] ==1)
+        k <- c(k1,k2)
         dt <- dt[-k,1:numcols]
 
         # Write new FCS
