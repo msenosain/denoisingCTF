@@ -75,18 +75,18 @@ rm_noise <- function(file_type = '.fcs|.FCS', rm_beads = TRUE, rm_debris = TRUE,
     # channels to remove beads 
     if(rm_beads){
         #print(cn)
-        prompt <- "Enter the column INDICES of the beads channels Ce140, Eu151, 
+        prompt3 <- "Enter the column INDICES of the beads channels Ce140, Eu151, 
         Eu153, Ho165, Lu175 (separated by single space only, no comas allowed) \n"
-        ft_beads <- col_nms[as.numeric(strsplit(readline(prompt), " ")[[1]])]
+        ft_beads <- col_nms[as.numeric(strsplit(readline(prompt3), " ")[[1]])]
     }
 
     # channels to remove debris
     if(rm_debris){
         #print(cn)
-        prompt <- "Enter the column INDICES of the gaussian parameters channels 
+        prompt4 <- "Enter the column INDICES of the gaussian parameters channels 
         'Event_length', 'Center', 'Offset', 'Residual', 'Width' and intact-cells 
         marker channel (separated by single space only, no comas allowed) \n"
-        ft_debris <- col_nms[as.numeric(strsplit(readline(prompt), " ")[[1]])]
+        ft_debris <- col_nms[as.numeric(strsplit(readline(prompt4), " ")[[1]])]
 
     }
 
@@ -102,15 +102,6 @@ rm_noise <- function(file_type = '.fcs|.FCS', rm_beads = TRUE, rm_debris = TRUE,
         #k <- c()
         numcols <- ncol(dt)
         
-        # Remove beads
-        if(rm_beads){
-            k2 <- predict_cl(dt, features = ft_beads, model = model_beads, 
-                alg = alg_bd, label = 'beads')
-            #k <- c(k, k2)
-            dt <- cbind(dt, beads = 0)
-            dt[k2, 'beads'] <- 1
-        }
-
         # Remove debris
         if(rm_debris){
             dt <- rm_zeros(dt, mand_idx = mand_idx, opt_idx = opt_idx)
@@ -120,6 +111,17 @@ rm_noise <- function(file_type = '.fcs|.FCS', rm_beads = TRUE, rm_debris = TRUE,
             dt <- cbind(dt, debris = 0)
             dt[k1, 'debris'] <- 1
         }
+
+
+        # Remove beads
+        if(rm_beads){
+            k2 <- predict_cl(dt, features = ft_beads, model = model_beads, 
+                alg = alg_bd, label = 'beads')
+            #k <- c(k, k2)
+            dt <- cbind(dt, beads = 0)
+            dt[k2, 'beads'] <- 1
+        }
+
 
         # Create output folder for CSV files
         output_path2 <- file.path(output_path, 'noiseCL')
@@ -132,7 +134,7 @@ rm_noise <- function(file_type = '.fcs|.FCS', rm_beads = TRUE, rm_debris = TRUE,
             '_noiseCL.csv')), row.names=FALSE)
         
         # remove k rows from dt
-        k <- c(k1,k2)
+        k <- unique(c(k1,k2))
         dt <- dt[-k,1:numcols]
 
         # Write new FCS
