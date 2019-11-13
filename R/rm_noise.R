@@ -22,8 +22,9 @@ rm_noise <- function(file_type = '.fcs|.FCS', rm_beads = TRUE, rm_debris = TRUE,
                      use.current.model.beads = TRUE, use.current.model.debris = TRUE,
                      model_beads = model_beads, model_debris = model_debris, 
                      alg_db = 'RF', alg_bd = 'RF'){
+    library('flowCore')
 
-    # Read modelS
+    # Read model
     if(use.current.model.beads){
         model_beads.file <- system.file('data', 'model_rf_beads.rds', package='denoisingCTF',
                                 mustWork=TRUE)
