@@ -24,7 +24,7 @@ rm_noise <- function(file_type = '.fcs|.FCS', rm_beads = TRUE, rm_debris = TRUE,
                      alg_db = 'RF', alg_bd = 'RF'){
     library('flowCore')
 
-    # Read model
+    # Read models
     if(use.current.model.beads){
         model_beads.file <- system.file('data', 'model_rf_beads.rds', package='denoisingCTF',
                                 mustWork=TRUE)
@@ -98,14 +98,14 @@ rm_noise <- function(file_type = '.fcs|.FCS', rm_beads = TRUE, rm_debris = TRUE,
         # Order columns
         dt <- dt[col_nms]
 
-        k <- c()
+        #k <- c()
         numcols <- ncol(dt)
         
         # Remove beads
         if(rm_beads){
             k2 <- predict_cl(dt, features = ft_beads, model = model_beads, 
                 alg = alg_bd, label = 'beads')
-            k <- c(k, k2)
+            #k <- c(k, k2)
             dt <- cbind(dt, beads = 0)
             dt[k2, 'beads'] <- 1
         }
@@ -115,7 +115,7 @@ rm_noise <- function(file_type = '.fcs|.FCS', rm_beads = TRUE, rm_debris = TRUE,
             dt <- rm_zeros(dt, mand_idx = mand_idx, opt_idx = opt_idx)
             k1 <- predict_cl(dt, model = model_debris, features = ft_debris, 
                 alg = alg_db, label = 'debris')
-            k <- c(k, k1)
+            #k <- c(k, k1)
             dt <- cbind(dt, debris = 0)
             dt[k1, 'debris'] <- 1
         }
@@ -131,7 +131,7 @@ rm_noise <- function(file_type = '.fcs|.FCS', rm_beads = TRUE, rm_debris = TRUE,
             '_noiseCL.csv')), row.names=FALSE)
         
         # remove k rows from dt
-        k <- unique(k)
+        k <- unique(c(k1,k2))
         dt <- dt[-k,1:numcols]
 
         # Write new FCS
