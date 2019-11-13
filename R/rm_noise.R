@@ -18,6 +18,7 @@
 #'        \code{model_beads}. It can be 'RF' for Random Forest or 'XGB' for XGBoost.
 #' @param alg_bd A character vector with the name of the algorithm used to train
 #'        \code{model_beads}. It can be 'RF' for Random Forest or 'XGB' for XGBoost.
+#' @export rm_noise()
 rm_noise <- function(file_type = '.fcs|.FCS', rm_beads = TRUE, rm_debris = TRUE,
                      use.current.model.beads = TRUE, use.current.model.debris = TRUE,
                      model_beads = model_beads, model_debris = model_debris, 

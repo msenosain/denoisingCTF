@@ -12,6 +12,7 @@
 #'        is \code{FALSE}.
 #' @param alg_bd A character vector with the name of the algorithm used to train
 #'        \code{model_beads}. It can be 'RF' for Random Forest or 'XGB' for XGBoost.
+#' @export pre_gate()
 pre_gate <- function(sample_size = 20, use.current.model = TRUE, model_beads=model_beads, 
     alg_bd = 'RF'){
     # Read model
@@ -103,6 +104,7 @@ pre_gate <- function(sample_size = 20, use.current.model = TRUE, model_beads=mod
 #'        to be passed to \code{BalancedSample} function.
 #' @param path_pregated A character vector with full path names. Default is the 
 #'        one directory up.
+#' @export post_gate()
 post_gate <- function (bsample = 5000, path_pregated = '../'){
 
     # Create output folder

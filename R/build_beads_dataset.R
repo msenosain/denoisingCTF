@@ -8,6 +8,7 @@
 #' a class column will be outputted. After the merge, files can be normalized
 #' using a bead normalization software.
 #'
+#' @export BeadsIDmerge()
 BeadsIDmerge <- function(){
     files_list <- list.files(pattern='.FCS|.fcs')
     smp <- flowCore::read.FCS(files_list[1], transformation = FALSE)
@@ -86,6 +87,7 @@ BeadsIDmerge <- function(){
 #'
 #' @return If CV< \code{CV_max} returns a \code{data.frame} with new class column
 #'         for beads or cells. Otherwise, returns a vector = 0. 
+#' @export BeadsUnsup()
 BeadsUnsup <- function(df, method = c('GMM', 'k_means'), beads_ch = beads_ch,
     n_clusters = 2, CV_max = 0.05, filename = filename, 
     output_path = output_path, FCSdesc = FCSdesc){
@@ -176,6 +178,7 @@ BeadsUnsup <- function(df, method = c('GMM', 'k_means'), beads_ch = beads_ch,
 #'        to be passed to \code{BalancedSample} function.
 #' @param class_col A character vector with to label the column that identify 
 #'        the classes.
+#' @export Beads_TrainTest()
 Beads_TrainTest <- function(sample_size = 30, method = method, 
     bsample = 5000, class_col = 'BeadsSmp_ID'){
 
