@@ -1,6 +1,10 @@
 #' Noise removal function
 #'
-#' This function 
+#' This function removes the beads and debris from FCS files using trained 
+#' classification models. It writes new FCS files with denoised data and also
+#' writes CSV files of the original data with the added columns of beads and 
+#' debris that contains the classification information in case the user wants 
+#' to explore the results.
 #'
 #' @param file_type A regular expression for the file extension. Only file names 
 #'        which match the regular expression will be returned. FCS only.
