@@ -21,9 +21,9 @@ all : clean docs $(HTML_FILES)
 	@mkdir -p $(OUTPUT_DIR) && mv $(MAN_DIR)/*.$(HTML_EXTENSION) $(OUTPUT_DIR)
 
 ## Cleans the data
-cleandocs :
+clean :
 	@rm -rf $(OUTPUT_DIR)/*$(HTML_EXTENSION)
-	#@rm -rf $(MAN_DIR)/*$(RD_EXTENSION)
+	@rm -rf $(MAN_DIR)/*$(RD_EXTENSION)
 
 ## Converts Rd to HTML
 %.html: %.Rd
