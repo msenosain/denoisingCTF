@@ -1,12 +1,15 @@
 # Directory for the RD files
-DOCS_DIR=man
+MAN_DIR=man
+
+# Directory for the docs files
+DOCS_DIR=docs
 
 # File extensions
 RD_EXTENSION = "Rd"
 HTML_EXTENSION = "html"
 
 # List of Rd- and HTML-files
-Rd_FILES=$(shell find $(DOCS_DIR) -name '*.Rd')
+Rd_FILES=$(shell find $(MAN_DIR) -name '*.Rd')
 HTML_FILES=$(patsubst %.Rd,%.html,$(Rd_FILES))
 
 # Path to output directory for HTML
@@ -15,24 +18,25 @@ OUTPUT_DIR='html_out'
 ## Runs all commands
 all : clean docs $(HTML_FILES)
 	# Moving html files
-	@mkdir -p $(OUTPUT_DIR) && mv $(DOCS_DIR)/*.$(HTML_EXTENSION) $(OUTPUT_DIR)
+	@mkdir -p $(OUTPUT_DIR) && mv $(MAN_DIR)/*.$(HTML_EXTENSION) $(OUTPUT_DIR)
 
 ## Cleans the data
 clean :
 	@rm -rf $(OUTPUT_DIR)/*$(HTML_EXTENSION)
-	@rm -rf $(DOCS_DIR)/*$(RD_EXTENSION)
+	@rm -rf $(MAN_DIR)/*$(RD_EXTENSION)
 
 ## Converts Rd to HTML
 %.html: %.Rd
 	@Rscript --quiet -e 'rmarkdown::render("$<")'
 
 ## Creates roxygen documentation
-docs:
-	@rm -rf $(DOCS_DIR)/*$(RD_EXTENSION)
+man:
+	@rm -rf $(MAN_DIR)/*$(RD_EXTENSION)
 	@Rscript --quiet -e 'devtools::document()'
 
 ## Updates package website
-pkgweb:
+docs:
+	@rm -rf $(DOCS_DIR)/*
 	@Rscript --quiet -e 'pkgdown::build_site()'
 
 ## List all files
