@@ -26,9 +26,14 @@ clean :
 %.html: %.Rd
 	@Rscript --quiet -e 'rmarkdown::render("$<")'
 
-## Creates Rd documentation
+## Creates roxygen documentation
 docs:
+	@rm -rf $(DOCS_DIR)/*$(RD_EXTENSION)
 	@Rscript --quiet -e 'devtools::document()'
+
+## Updates package website
+pkgweb:
+	@Rscript --quiet -e 'pkgdown::build_site()'
 
 ## List all files
 list_html:
