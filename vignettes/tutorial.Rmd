@@ -1,0 +1,62 @@
+---
+title: "denoisingCTF Tutorial"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = FALSE
+)
+```
+
+This tutorial will guide you through the usage of the main functions of the 
+package. You can either use the function `rm_noise` to remove the noise applying 
+the current trained models, or train your own models and then call them into the 
+main function.
+
+## Getting started
+You will need to install the `devtools` CRAN package. All other dependencies 
+will be automatically installed with the package installation.
+
+```{r}
+# Install devtools
+install.packages("devtools")
+
+# Install denoisingCTF
+devtools::install_github("msenosain/denoisingCTF")
+```
+
+## Preparing your data
+Before you attempt to clean your data or train your own models, your FCS files
+should be previously normalized using a bead normalization software. 
+Additionally, for your files to be comparable they must have the same antibody 
+panel which means same number of channels with same names and descriptions.
+Both can be done using the [`premessa`](https://github.com/ParkerICI/premessa) 
+package (See functions [`paneleditor_GUI`](https://github.com/ParkerICI/premessa#panel-editing-and-renaming) 
+and [`normalizer_GUI`](https://github.com/ParkerICI/premessa#bead-based-normalization)).
+
+
+
+## Denoising CyTOF data
+
+This function will remove zeros, beads and debris from the FCS files in the 
+current working directory using previously trained models. 
+
+First, a prompt will ask the user for the "Mandatory markers", which can be any
+marker that _should_ be expressed in the cells (e.g. post-fixation DNA intercalator).
+Any cell/event/row that has zero expression of this marker is removed.
+
+Then, a second prompt will ask the user for the "Optional markers", which can 
+be markers used for cell type identification. In this case, any cell/event/row
+that has zero expression of _all_ this markers, meaning that it cannot be 
+identified as any existing cell type, is removed.
+
+```{r setup}
+library(denoisingCTF)
+```

@@ -32,3 +32,7 @@ Imports:
     doParallel,
     foreach
 RoxygenNote: 7.0.0.9000
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
