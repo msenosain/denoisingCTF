@@ -198,7 +198,7 @@ in `test_set`. Can be interpreted as row names of `test_set`.
 
 __2. Model training__
 To train the new beads model use the `TrainModel` function. You can specify which
-algorithm to use in the argument `alg` (see [documentation]([tutorial](https://msenosain.github.io/denoisingCTF/reference/TrainModel.html)) for details). 
+algorithm to use in the argument `alg` (see [documentation](https://msenosain.github.io/denoisingCTF/reference/TrainModel.html)) for details). 
 ```{r, eval = FALSE}
 denoisingCTF::TrainModel(train_set, test_set, alg = 'all', class_col = 'BeadsSmp_ID', 
     seed = 40, name_0 = 'cells', name_1 = 'beads', label = 'beads',
