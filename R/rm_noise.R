@@ -79,17 +79,28 @@ rm_noise <- function(file_type = '.fcs|.FCS', rm_beads = TRUE, rm_debris = TRUE,
     # channels to remove beads 
     if(rm_beads){
         #print(cn)
-        prompt3 <- "Enter the column INDICES of the beads channels Ce140, Eu151, 
-        Eu153, Ho165, Lu175 (separated by single space only, no comas allowed) \n"
+        if(use.current.model.beads){
+            prompt3 <- "Enter the column INDICES of the beads channels Ce140, Eu151, 
+            Eu153, Ho165, Lu175 (separated by single space only, no comas allowed) \n"
+        }else{
+            prompt3 <- "Enter the column INDICES of the beads channels (separated 
+            by single space only, no comas allowed) \n"
+        }
         ft_beads <- col_nms[as.numeric(strsplit(readline(prompt3), " ")[[1]])]
     }
 
     # channels to remove debris
     if(rm_debris){
         #print(cn)
-        prompt4 <- "Enter the column INDICES of the gaussian parameters channels 
-        'Event_length', 'Center', 'Offset', 'Residual', 'Width' and intact-cells 
-        marker channel (separated by single space only, no comas allowed) \n"
+        if(use.current.model.debris){
+            prompt4 <- "Enter the column INDICES of the gaussian parameters channels 
+            'Event_length', 'Center', 'Offset', 'Residual', 'Width' and intact-cells 
+            marker channel (separated by single space only, no comas allowed) \n"
+
+        }else{
+            prompt4 <- "Enter the column INDICES of channels for debris (separated 
+            by single space only, no comas allowed) \n"
+        }
         ft_debris <- col_nms[as.numeric(strsplit(readline(prompt4), " ")[[1]])]
 
     }
