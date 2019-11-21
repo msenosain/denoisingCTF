@@ -91,7 +91,7 @@ TrainSetList <- function(dt_ls, s_train = 0.75) {
 
 
 
-#' Generates datasets for model training
+#' Get datasets for model training
 #'
 #' This function generates training and test sets for model training with 
 #' balanced classes using functions \code{BalancedSample} and \code{TrainSetList}.
