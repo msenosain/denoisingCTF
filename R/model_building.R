@@ -53,8 +53,18 @@ rm_zeros <- function (df, mand_idx, opt_idx, ...){
 #'         randomly sampled.
 #' @export 
 BalancedSample <- function(df, sample_size = 5000, class_col = class_col){
-    idx <- c(sample(which(df[class_col] == 1), sample_size, replace = T), #noise/beads
-             sample(which(df[class_col] == 0), sample_size, replace = T)) #cells
+    if(length(which(df[class_col] == 1))<sample_size){
+        replace_1 <- TRUE
+    }else{
+        replace_1 <- FALSE
+    }
+    if(length(which(df[class_col] == 0))<sample_size){
+        replace_0 <- TRUE
+    }else{
+        replace_O <- FALSE
+    }
+    idx <- c(sample(which(df[class_col] == 1), sample_size, replace = replace_1), #noise/beads
+             sample(which(df[class_col] == 0), sample_size, replace = replace_0)) #cells
     df <- df[idx,]
     return(df)
 }
