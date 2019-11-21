@@ -30,11 +30,6 @@ rm_noise(file_type = '.fcs|.FCS', rm_beads = TRUE, rm_debris = TRUE,
     use.current.model.beads = TRUE, use.current.model.debris = TRUE,
     alg_db = 'RF', alg_bd = 'RF')
 
-# Mandatory: 52
-# Optional: 20 29 46 34 44 47 15 37 40 31 49
-# Beads: 14 26 28 41 51
-# GP_dc: 2 52 73 74 75 76
-
 ```
 
 ### Preprocessing datasets and model training
@@ -74,7 +69,7 @@ TrainModel(train_set, test_set, alg = 'all', class_col = 'GP_Noise',
 
 ## Tutorial
 
-For a detailed example, see our tutorial.
+For a detailed example, see our [tutorial](https://msenosain.github.io/denoisingCTF/articles/tutorial.html).
 
 
 ## Debris and Beads model training and evaluation
