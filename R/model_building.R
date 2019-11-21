@@ -105,8 +105,8 @@ TrainSetList <- function(dt_ls, s_train = 0.75) {
 #'        the classes.
 #' @export
 TrainTest <- function(dt_ls, output_path = output_path, label = label, 
-    class_col = class_col){
-    dt_train <- TrainSetList(dt_ls)
+    class_col = class_col, ...){
+    dt_train <- TrainSetList(dt_ls, ...)
     k <- which(names(dt_ls)%in% names(dt_train))
     dt_test <- dt_ls[-k]
 
