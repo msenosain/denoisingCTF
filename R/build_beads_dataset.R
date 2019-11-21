@@ -179,7 +179,7 @@ BeadsUnsup <- function(df, method = c('GMM', 'k_means'), beads_ch = beads_ch,
 #'        the classes.
 #' @export
 Beads_TrainTest <- function(sample_size = 30, method = method, 
-    bsample = 5000, class_col = 'BeadsSmp_ID'){
+    bsample = 5000, class_col = 'BeadsSmp_ID', ...){
 
     # Read files list
     files_list <- list.files(pattern='.FCS|.fcs')
@@ -243,6 +243,6 @@ Beads_TrainTest <- function(sample_size = 30, method = method,
     dt_ls <- Filter(is.data.frame, dt_ls)
 
     # Compute train/test sets
-    TrainTest(dt_ls, output_path = output_path, label = 'beads')
+    TrainTest(dt_ls, output_path = output_path, label = 'beads', ...)
     
 }
