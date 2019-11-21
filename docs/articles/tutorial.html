@@ -251,7 +251,7 @@
 <li>
 <code>test_nms</code>: a character vector with the names of the files used as they appear in <code>test_set</code>. Can be interpreted as row names of <code>test_set</code>.</li>
 </ul>
-<p><strong>2. Model training</strong> To train the new beads model use the <code>TrainModel</code> function. You can specify which algorithm to use in the argument <code>alg</code> (see <a href="https://msenosain.github.io/denoisingCTF/reference/TrainModel.html">documentation</a>) for details).</p>
+<p><strong>2. Model training</strong> To train the new beads model use the <code>TrainModel</code> function. You can specify which algorithm to use in the argument <code>alg</code> (see <a href="https://rmarkdown.rstudio.com/lesson-8.html">documentation</a>) for details).</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/TrainModel.html">TrainModel</a></span>(train_set, test_set, <span class="dt">alg =</span> <span class="st">'all'</span>, <span class="dt">class_col =</span> <span class="st">'BeadsSmp_ID'</span>, </a>
 <a class="sourceLine" id="cb11-2" data-line-number="2">    <span class="dt">seed =</span> <span class="dv">40</span>, <span class="dt">name_0 =</span> <span class="st">'cells'</span>, <span class="dt">name_1 =</span> <span class="st">'beads'</span>, <span class="dt">label =</span> <span class="st">'beads'</span>,</a>
 <a class="sourceLine" id="cb11-3" data-line-number="3">    <span class="dt">allowParallel =</span> T, <span class="dt">free_cores =</span> <span class="dv">2</span>)</a></code></pre></div>
