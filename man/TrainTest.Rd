@@ -8,7 +8,8 @@ TrainTest(
   dt_ls,
   output_path = output_path,
   label = label,
-  class_col = class_col
+  class_col = class_col,
+  ...
 )
 }
 \arguments{

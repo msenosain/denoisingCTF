@@ -8,7 +8,8 @@ Beads_TrainTest(
   sample_size = 30,
   method = method,
   bsample = 5000,
-  class_col = "BeadsSmp_ID"
+  class_col = "BeadsSmp_ID",
+  ...
 )
 }
 \arguments{

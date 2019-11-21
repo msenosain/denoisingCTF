@@ -35,9 +35,8 @@ man:
 	@Rscript --quiet -e 'devtools::document()'
 
 ## Updates package website
-docs:
-	@rm -rf $(DOCS_DIR)
-	@Rscript --quiet -e 'pkgdown::build_site()'
+docs: 
+	@Rscript 'pkgdown::build_site()'
 
 ## List all files
 list_html:

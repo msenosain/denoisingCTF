@@ -79,11 +79,11 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You will need to install the <code>devtools</code> CRAN package. All other dependencies will be automatically installed with the package installation.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Install devtools</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># Install denoisingCTF</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"msenosain/denoisingCTF"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Install devtools</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># Install denoisingCTF</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"msenosain/denoisingCTF"</span>)</a></code></pre></div>
 </div>
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
@@ -92,16 +92,16 @@
 <h3 class="hasAnchor">
 <a href="#denoising-cytof-data" class="anchor"></a>Denoising CyTOF data</h3>
 <p>This function will remove zeros, beads and debris from the FCS files in the current working directory using previously trained models.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(denoisingCTF)</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="co"># Set working directory in folder with files to be denoised</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="kw"><a href="reference/rm_noise.html">rm_noise</a></span>(<span class="dt">file_type =</span> <span class="st">'.fcs|.FCS'</span>, <span class="dt">rm_beads =</span> <span class="ot">TRUE</span>, <span class="dt">rm_debris =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb2-4"><a href="#cb2-4"></a>    <span class="dt">use.current.model.beads =</span> <span class="ot">TRUE</span>, <span class="dt">use.current.model.debris =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb2-5"><a href="#cb2-5"></a>    <span class="dt">alg_db =</span> <span class="st">'RF'</span>, <span class="dt">alg_bd =</span> <span class="st">'RF'</span>)</span>
-<span id="cb2-6"><a href="#cb2-6"></a></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># Mandatory: 52</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co"># Optional: 20 29 46 34 44 47 15 37 40 31 49</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="co"># Beads: 14 26 28 41 51</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="co"># GP_dc: 2 52 73 74 75 76</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(denoisingCTF)</a>
+<a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co"># Set working directory in folder with files to be denoised</span></a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"><span class="kw"><a href="reference/rm_noise.html">rm_noise</a></span>(<span class="dt">file_type =</span> <span class="st">'.fcs|.FCS'</span>, <span class="dt">rm_beads =</span> <span class="ot">TRUE</span>, <span class="dt">rm_debris =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">    <span class="dt">use.current.model.beads =</span> <span class="ot">TRUE</span>, <span class="dt">use.current.model.debris =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">    <span class="dt">alg_db =</span> <span class="st">'RF'</span>, <span class="dt">alg_bd =</span> <span class="st">'RF'</span>)</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb2-7" data-line-number="7"><span class="co"># Mandatory: 52</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8"><span class="co"># Optional: 20 29 46 34 44 47 15 37 40 31 49</span></a>
+<a class="sourceLine" id="cb2-9" data-line-number="9"><span class="co"># Beads: 14 26 28 41 51</span></a>
+<a class="sourceLine" id="cb2-10" data-line-number="10"><span class="co"># GP_dc: 2 52 73 74 75 76</span></a></code></pre></div>
 </div>
 <div id="preprocessing-datasets-and-model-training" class="section level3">
 <h3 class="hasAnchor">
@@ -110,29 +110,29 @@
 <ol>
 <li>Beads Model:</li>
 </ol>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Unsupervised beads detection and training/testing data sets generation.</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw"><a href="reference/Beads_TrainTest.html">Beads_TrainTest</a></span>(<span class="dt">sample_size =</span> <span class="dv">40</span>, <span class="dt">method =</span> <span class="st">'k_means'</span>, </span>
-<span id="cb3-3"><a href="#cb3-3"></a>    <span class="dt">bsample =</span> <span class="dv">5000</span>, <span class="dt">class_col =</span> <span class="st">'BeadsSmp_ID'</span>)</span>
-<span id="cb3-4"><a href="#cb3-4"></a></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># Train model</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="kw"><a href="reference/TrainModel.html">TrainModel</a></span>(train_set, test_set, <span class="dt">alg =</span> <span class="st">'all'</span>, <span class="dt">class_col =</span> <span class="st">'BeadsSmp_ID'</span>, </span>
-<span id="cb3-7"><a href="#cb3-7"></a>    <span class="dt">seed =</span> <span class="dv">40</span>, <span class="dt">name_0 =</span> <span class="st">'cells'</span>, <span class="dt">name_1 =</span> <span class="st">'beads'</span>, <span class="dt">label =</span> <span class="st">'beads'</span>,</span>
-<span id="cb3-8"><a href="#cb3-8"></a>    <span class="dt">allowParallel =</span> T, <span class="dt">free_cores =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Unsupervised beads detection and training/testing data sets generation.</span></a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="reference/Beads_TrainTest.html">Beads_TrainTest</a></span>(<span class="dt">sample_size =</span> <span class="dv">40</span>, <span class="dt">method =</span> <span class="st">'k_means'</span>, </a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">    <span class="dt">bsample =</span> <span class="dv">5000</span>, <span class="dt">class_col =</span> <span class="st">'BeadsSmp_ID'</span>)</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co"># Train model</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="kw"><a href="reference/TrainModel.html">TrainModel</a></span>(train_set, test_set, <span class="dt">alg =</span> <span class="st">'all'</span>, <span class="dt">class_col =</span> <span class="st">'BeadsSmp_ID'</span>, </a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">    <span class="dt">seed =</span> <span class="dv">40</span>, <span class="dt">name_0 =</span> <span class="st">'cells'</span>, <span class="dt">name_1 =</span> <span class="st">'beads'</span>, <span class="dt">label =</span> <span class="st">'beads'</span>,</a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">    <span class="dt">allowParallel =</span> T, <span class="dt">free_cores =</span> <span class="dv">2</span>)</a></code></pre></div>
 <ol>
 <li>Debris model:</li>
 </ol>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Removal of zeros, beads and addition of row ID column</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="kw"><a href="reference/pre_gate.html">pre_gate</a></span>(<span class="dt">sample_size=</span><span class="dv">30</span>, <span class="dt">model_beads=</span>model_beads, <span class="dt">alg_bd =</span> <span class="st">'RF'</span>) </span>
-<span id="cb4-3"><a href="#cb4-3"></a></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="co"># Manually gate debris and dead cells using Gaussian Parameters and a live/dead cell marker.</span></span>
-<span id="cb4-5"><a href="#cb4-5"></a></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co"># Comparison of pre-gated and post-gated files, noise labeling and training/testing data sets generation.</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="kw"><a href="reference/post_gate.html">post_gate</a></span>(<span class="dt">bsample =</span> <span class="dv">5000</span>, <span class="dt">path_pregated =</span> <span class="st">'../'</span>) </span>
-<span id="cb4-8"><a href="#cb4-8"></a></span>
-<span id="cb4-9"><a href="#cb4-9"></a><span class="co"># Train model</span></span>
-<span id="cb4-10"><a href="#cb4-10"></a><span class="kw"><a href="reference/TrainModel.html">TrainModel</a></span>(train_set, test_set, <span class="dt">alg =</span> <span class="st">'all'</span>, <span class="dt">class_col =</span> <span class="st">'GP_Noise'</span>, </span>
-<span id="cb4-11"><a href="#cb4-11"></a>    <span class="dt">seed =</span> <span class="dv">40</span>, <span class="dt">name_0 =</span> <span class="st">'cells'</span>, <span class="dt">name_1 =</span> <span class="st">'debris'</span>, <span class="dt">label =</span> <span class="st">'debris'</span>, </span>
-<span id="cb4-12"><a href="#cb4-12"></a>    <span class="dt">allowParallel =</span> T, <span class="dt">free_cores =</span> <span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co"># Removal of zeros, beads and addition of row ID column</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2"><span class="kw"><a href="reference/pre_gate.html">pre_gate</a></span>(<span class="dt">sample_size=</span><span class="dv">30</span>, <span class="dt">model_beads=</span>model_beads, <span class="dt">alg_bd =</span> <span class="st">'RF'</span>) </a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb4-4" data-line-number="4"><span class="co"># Manually gate debris and dead cells using Gaussian Parameters and a live/dead cell marker.</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co"># Comparison of pre-gated and post-gated files, noise labeling and training/testing data sets generation.</span></a>
+<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="kw"><a href="reference/post_gate.html">post_gate</a></span>(<span class="dt">bsample =</span> <span class="dv">5000</span>, <span class="dt">path_pregated =</span> <span class="st">'../'</span>) </a>
+<a class="sourceLine" id="cb4-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb4-9" data-line-number="9"><span class="co"># Train model</span></a>
+<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="kw"><a href="reference/TrainModel.html">TrainModel</a></span>(train_set, test_set, <span class="dt">alg =</span> <span class="st">'all'</span>, <span class="dt">class_col =</span> <span class="st">'GP_Noise'</span>, </a>
+<a class="sourceLine" id="cb4-11" data-line-number="11">    <span class="dt">seed =</span> <span class="dv">40</span>, <span class="dt">name_0 =</span> <span class="st">'cells'</span>, <span class="dt">name_1 =</span> <span class="st">'debris'</span>, <span class="dt">label =</span> <span class="st">'debris'</span>, </a>
+<a class="sourceLine" id="cb4-12" data-line-number="12">    <span class="dt">allowParallel =</span> T, <span class="dt">free_cores =</span> <span class="dv">2</span>)</a></code></pre></div>
 </div>
 </div>
 <div id="tutorial" class="section level2">

@@ -87,11 +87,11 @@
 <h2 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting started</h2>
 <p>You will need to install the <code>devtools</code> CRAN package. All other dependencies will be automatically installed with the package installation.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Install devtools</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># Install denoisingCTF</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"msenosain/denoisingCTF"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Install devtools</span></a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># Install denoisingCTF</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"msenosain/denoisingCTF"</span>)</a></code></pre></div>
 </div>
 <div id="preparing-your-data" class="section level2">
 <h2 class="hasAnchor">
@@ -101,10 +101,177 @@
 <div id="denoising-cytof-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#denoising-cytof-data" class="anchor"></a>Denoising CyTOF data</h2>
-<p>This function will remove zeros, beads and debris from the FCS files in the current working directory using previously trained models.</p>
-<p>First, a prompt will ask the user for the “Mandatory markers”, which can be any marker that <em>should</em> be expressed in the cells (e.g. post-fixation DNA intercalator). Any cell/event/row that has zero expression of this marker is removed.</p>
-<p>Then, a second prompt will ask the user for the “Optional markers”, which can be markers used for cell type identification. In this case, any cell/event/row that has zero expression of <em>all</em> this markers, meaning that it cannot be identified as any existing cell type, is removed.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(denoisingCTF)</span></code></pre></div>
+<p>The <code>rm_noise</code> function will remove zeros, beads and debris from the FCS files in the current working directory using previously trained models.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/rm_noise.html">rm_noise</a></span>()</a></code></pre></div>
+<p>After printing the list of column names with the index number, a first prompt will ask the user for the “mandatory” markers, which can be any marker that <em>should</em> be expressed in the cells (e.g. post-fixation DNA intercalator). Any cell/event/row that has zero expression of this marker is removed. In this example our “mandatory” marker is Histone H3: <code>##[52,] "Yb176Di_176Yb_His-H3"</code>.</p>
+<pre><code>##       [,1]                       
+##  [1,] "Time_Time"                
+##  [2,] "Event_length_Event_length"
+##  [3,] "Pd102Di_102Pd"            
+##  [4,] "Rh103Di_103Rh"            
+##  [5,] "Pd104Di_104Pd"            
+##  [6,] "Pd105Di_105Pd"            
+##  [7,] "Pd106Di_106Pd"            
+##  [8,] "Pd108Di_108Pd"            
+##  [9,] "Pd110Di_110Pd"            
+## [10,] "Sn120Di_120Sn"            
+## [11,] "I127Di_127I"              
+## [12,] "Xe131Di_131Xe"            
+## [13,] "Cs133Di_133Cs"            
+## [14,] "Ce140Di_140Ce"            
+## [15,] "Pr141Di_141Pr_EpCAM"      
+## [16,] "Ce142Di_142Ce"            
+## [17,] "Nd142Di_142Nd_ccasp3"     
+## [18,] "Nd143Di_143Nd_TP53"       
+## [19,] "Nd144Di_144Nd_HLA-ABC"    
+## [20,] "Nd145Di_145Nd_CD31"       
+## [21,] "Nd146Di_146Nd_Thioredoxin"
+## [22,] "Sm147Di_147Sm_b-CAT"      
+## [23,] "Nd148Di_148Nd_HER2"       
+## [24,] "Sm149Di_149Sm_p-STAT6"    
+## [25,] "Nd150Di_150Nd_p-STAT5"    
+## [26,] "Eu151Di_151Eu_TTF1"       
+## [27,] "Sm152Di_152Sm_p-AKT"      
+## [28,] "Eu153Di_153Eu_Ki67"       
+## [29,] "Sm154Di_154Sm_CD45"       
+## [30,] "Gd155Di_155Gd_CD56"       
+## [31,] "Gd156Di_156Gd_Vimentin"   
+## [32,] "Gd157Di_157Gd"            
+## [33,] "Gd158Di_158Gd_p-STAT3"    
+## [34,] "Tb159Di_159Tb_CD4"        
+## [35,] "Gd160Di_160Gd_MDM2"       
+## [36,] "Dy160Di_160Dy"            
+## [37,] "Dy161Di_161Dy_Cytokeratin"
+## [38,] "Dy162Di_162Dy_MET"        
+## [39,] "Dy163Di_163Dy_TP63"       
+## [40,] "Dy164Di_164Dy_CK7"        
+## [41,] "Ho165Di_165Ho_EGFR"       
+## [42,] "Er166Di_166Er_CD44"       
+## [43,] "Er167Di_167Er_p-ERK"      
+## [44,] "Er168Di_168Er_CD8"        
+## [45,] "Tm169Di_169Tm_CD24"       
+## [46,] "Yb170Di_170Yb_CD3"        
+## [47,] "Yb171Di_171Yb_CD11b"      
+## [48,] "Yb172Di_172Yb_p-S6"       
+## [49,] "Yb173Di_173Yb_CD90"       
+## [50,] "Yb174Di_174Yb_HLA-DR"     
+## [51,] "Lu175Di_175Lu_PD-L1"      
+## [52,] "Yb176Di_176Yb_His-H3"     
+## [53,] "Hf178Di_178Hf"            
+## [54,] "Hf179Di_179Hf"            
+## [55,] "Hf180Di_180Hf"            
+## [56,] "Ta181Di_181Ta"            
+## [57,] "W182Di_182W"              
+## [58,] "W183Di_183W"              
+## [59,] "W184Di_184W"              
+## [60,] "Re185Di_185Re"            
+## [61,] "Os186Di_186Os"            
+## [62,] "Re187Di_187Re"            
+## [63,] "Os188Di_188Os"            
+## [64,] "Os189Di_189Os"            
+## [65,] "BCKG190Di_190BCKG"        
+## [66,] "Ir191Di_191Ir"            
+## [67,] "Os192Di_192Os"            
+## [68,] "Ir193Di_193Ir"            
+## [69,] "Pt194Di_194Pt"            
+## [70,] "Pt195Di_195Pt"            
+## [71,] "Pt198Di_198Pt"            
+## [72,] "Pb208Di_208Pb"            
+## [73,] "Center_Center"            
+## [74,] "Offset_Offset"            
+## [75,] "Width_Width"              
+## [76,] "Residual_Residual"        
+## [77,] "beadDist_beadDist"
+## Enter the column INDICES of the 'mandatory' markers (separated by single space only, no comas allowed)</code></pre>
+<p>A second prompt will ask the user for the “optional” markers, which can be markers used for cell type identification.</p>
+<pre><code>## Enter the column INDICES of the 'optional' markers (separated by single space only, no comas allowed)</code></pre>
+<p>Any cell/event/row that has zero expression of <em>all</em> this markers, meaning that it cannot be identified as any existing cell type, is removed. In this example our “optional” markers are the following:</p>
+<ul>
+<li><code>## [15,] "Pr141Di_141Pr_EpCAM"</code></li>
+<li><code>## [20,] "Nd145Di_145Nd_CD31"</code></li>
+<li><code>## [29,] "Sm154Di_154Sm_CD45"</code></li>
+<li><code>## [31,] "Gd156Di_156Gd_Vimentin"</code></li>
+<li><code>## [34,] "Tb159Di_159Tb_CD4"</code></li>
+<li><code>## [37,] "Dy161Di_161Dy_Cytokeratin"</code></li>
+<li><code>## [40,] "Dy164Di_164Dy_CK7"</code></li>
+<li><code>## [44,] "Er168Di_168Er_CD8"</code></li>
+<li><code>## [46,] "Yb170Di_170Yb_CD3"</code></li>
+<li><code>## [47,] "Yb171Di_171Yb_CD11b"</code></li>
+<li><code>## [49,] "Yb173Di_173Yb_CD90"</code></li>
+</ul>
+<p>The next prompt will ask the user for the beads channels column indices, and the last prompt will ask for the Gaussian parameters channels and the intact-cells marker channel. The latter could be any marker used to distinguish dead cells from live cells, such as a DNA intercalator post-fixation (e.g. iridium) or an antibody for DNA protein (e.g. Histone H3). This will be used as input features for the beads model and the debris model, respectively. Events classified as beads or debris will be removed.</p>
+<pre><code>## Enter the column INDICES of the beads channels Ce140, Eu151, Eu153, Ho165, Lu175 (separated by single space only, no comas allowed)</code></pre>
+<pre><code>## Enter the column INDICES of the gaussian parameters channels 'Event_length', 'Center', 'Offset', 'Residual', 'Width' and intact-cells marker channel (separated by single space only, no comas allowed)</code></pre>
+<p>Finally, this function will create a new directory called <em>output</em> which will contain the newly written FCS files after noise removal. Additionally, within the output folder you will find a folder called <em>noiseCL</em> containing CSV files with the original data and the added columns <em>beads</em> and <em>debris</em> in which 0 means negative and 1 means positive for beads/noise (0 could be interpreted as ‘cells’). The user can use the CSV files to assess the accuracy of the classification if needed.</p>
+<p>See below for an example of the output’s directory structure:</p>
+<pre><code>## .
+## ├── 181018_2_11841_PX_normalized.fcs
+## ├── 181018_4_13651_I_normalized.fcs
+## ├── 181018_6_13074_P_normalized.fcs
+## ├── 181019_0_normalized.fcs
+## ├── 181019_1_11817_P_normalized.fcs
+## └── output
+##     ├── 181018_2_11841_PX_normalized_denoised.FCS
+##     ├── 181018_4_13651_I_normalized_denoised.FCS
+##     ├── 181018_6_13074_P_normalized_denoised.FCS
+##     ├── 181019_0_normalized_denoised.FCS
+##     ├── 181019_1_11817_P_normalized_denoised.FCS
+##     └── noiseCL
+##         ├── 181018_2_11841_PX_normalized_noiseCL.csv
+##         ├── 181018_4_13651_I_normalized_noiseCL.csv
+##         ├── 181018_6_13074_P_normalized_noiseCL.csv
+##         ├── 181019_0_normalized_noiseCL.csv
+##         └── 181019_1_11817_P_normalized_noiseCL.csv</code></pre>
+</div>
+<div id="model-training" class="section level2">
+<h2 class="hasAnchor">
+<a href="#model-training" class="anchor"></a>Model training</h2>
+<p>The <code>rm_noise</code> function can take new models as input in the arguments <code>model_beads</code> and <code>model_debris</code> when <code>use.current.model.beads=FALSE</code> and <code>use.current.model.debris=FALSE</code>, respectively. In this section, you will see step by step how can you build training and test data sets and train new models.</p>
+<p>I would advise to always train and use your own models because these may be sensible to bead normalization. Also, because: * you may have a different strategy to identify debris and dead cells. * you may have used a different set of normalization beads.</p>
+<div id="beads-model" class="section level3">
+<h3 class="hasAnchor">
+<a href="#beads-model" class="anchor"></a>Beads model</h3>
+<p><strong>1. Build training and test datasets</strong> You should set up your working directory to the folder that contains your FCS files of interest.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span>(<span class="st">"~/Documents/My_CyTOF_Files"</span>)</a></code></pre></div>
+<p>The <code>Beads_TrainTest</code> function will select a random sample from your FCS files (length specified in <code>sample_size</code> argument), and a promt will ask the user for the beads channels column indices.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/Beads_TrainTest.html">Beads_TrainTest</a></span>(<span class="dt">sample_size =</span> <span class="dv">20</span>, <span class="dt">method =</span> <span class="st">'k_means'</span>, </a>
+<a class="sourceLine" id="cb9-2" data-line-number="2">    <span class="dt">bsample =</span> <span class="dv">5000</span>, <span class="dt">class_col =</span> <span class="st">'BeadsSmp_ID'</span>, ...)</a></code></pre></div>
+<pre><code>## Enter the column INDICES of the beads channels (separated by single space only, no comas allowed)</code></pre>
+<p>Then it will apply <em>arcsinh</em> tranformation (cofactor=5) and perform an unsupervised detection of the beads using a clustering method, which can be either by <em>k-means</em> or <em>Gaussian Mixture Models</em>. Clustering results will be evaluated and only the files in which the events identified as beads show a coefficient of variation (CV) &lt;0.05 will be selected to be part of the training and test sets. In all cases, the function writes a CSV file with the summary statistics, labeled <code>filename_beadsstats.csv</code> for a file that passed the test, or <code>filename__FAILEDbeadsstats.csv</code> for a file in which the clustering failed to identify the beads correctly.</p>
+<p>Since CyTOF experiments usually render a large number of events (sometimes more than a million) and we do not need that many events to train a model; the function will take a random sample of the files for which the clustering was successful. This will be a balanced sample, having <code>bsample</code> number of events per class. If <code>bsample</code> is larger than the amount of events available for that class then <code>replacement=TRUE</code>.</p>
+<p>From the <strong>n</strong> ‘good’ files, 0.75 will be randomly pulled for the training set and the remaining 0.25 will be the test set (default). The proportion can be changed by passing the argument <code>s_train</code>, which determines the size of the fraction that goes into the training set (any number between 0:1).</p>
+<p>Finally, the function writes a <code>.RData</code> file that includes:</p>
+<ul>
+<li>
+<code>train_set</code>: a <code>data.frame</code> with the training set.</li>
+<li>
+<code>test_set</code>: a <code>data.frame</code> with the test set.</li>
+<li>
+<code>train_nms</code>: a character vector with the names of the files used as they appear in <code>train_set</code>. Can be interpreted as row names of <code>train_set</code>.</li>
+<li>
+<code>test_nms</code>: a character vector with the names of the files used as they appear in <code>test_set</code>. Can be interpreted as row names of <code>test_set</code>.</li>
+</ul>
+<p><strong>2. Model training</strong> To train the new beads model use the <code>TrainModel</code> function. You can specify which algorithm to use in the argument <code>alg</code> (see documentation for details).</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/TrainModel.html">TrainModel</a></span>(train_set, test_set, <span class="dt">alg =</span> <span class="st">'all'</span>, <span class="dt">class_col =</span> <span class="st">'BeadsSmp_ID'</span>, </a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">    <span class="dt">seed =</span> <span class="dv">40</span>, <span class="dt">name_0 =</span> <span class="st">'cells'</span>, <span class="dt">name_1 =</span> <span class="st">'beads'</span>, <span class="dt">label =</span> <span class="st">'beads'</span>,</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">    <span class="dt">allowParallel =</span> T, <span class="dt">free_cores =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p>This function will write a <code>.RData</code> file that includes:</p>
+<ul>
+<li>
+<code>model_alg</code>: the trained model.</li>
+<li>
+<code>ftimp_alg</code>: feature importance.</li>
+<li>
+<code>pred_alg</code>: the predicted classes for the test set.</li>
+<li>
+<code>conf_alg</code>: the confusion matrix from the test set prediction.</li>
+</ul>
+</div>
+<div id="debris-model" class="section level3">
+<h3 class="hasAnchor">
+<a href="#debris-model" class="anchor"></a>Debris model</h3>
+<p>test test</p>
+</div>
 </div>
   </div>
 
@@ -117,6 +284,7 @@
 <li><a href="#getting-started">Getting started</a></li>
       <li><a href="#preparing-your-data">Preparing your data</a></li>
       <li><a href="#denoising-cytof-data">Denoising CyTOF data</a></li>
+      <li><a href="#model-training">Model training</a></li>
       </ul>
 </div>
       </div>

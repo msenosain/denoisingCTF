@@ -14,6 +14,13 @@ knitr::opts_chunk$set(
 )
 ```
 
+```{r setup, include = FALSE, echo=FALSE}
+# https://philmikejones.me/tutorials/2015-05-20-set-root-directory-knitr/ 
+# Knitr, by default, looks in the same directory as your .Rmd file 
+# This changes the wd to look for other files
+knitr::opts_knit$set(root.dir = "../../../../test_CyTOF/test2")
+```
+
 This tutorial will guide you through the usage of the main functions of the 
 package. You can either use the function `rm_noise` to remove the noise applying 
 the current trained models, or train your own models and then call them into the 
@@ -206,4 +213,4 @@ This function will write a `.RData` file that includes:
 
 ### Debris model
 
-
+test test
