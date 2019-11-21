@@ -8,41 +8,22 @@ DOCS_DIR=docs
 RD_EXTENSION = "Rd"
 HTML_EXTENSION = "html"
 
-# List of Rd- and HTML-files
-Rd_FILES=$(shell find $(MAN_DIR) -name '*.Rd')
-HTML_FILES=$(patsubst %.Rd,%.html,$(Rd_FILES))
-
-# Path to output directory for HTML
-OUTPUT_DIR='html_out'
-
-## Runs all commands
-all : clean docs $(HTML_FILES)
-	# Moving html files
-	@mkdir -p $(OUTPUT_DIR) && mv $(MAN_DIR)/*.$(HTML_EXTENSION) $(OUTPUT_DIR)
 
 ## Cleans the data
 clean :
-	@rm -rf $(OUTPUT_DIR)/*$(HTML_EXTENSION)
-	@rm -rf $(MAN_DIR)/*$(RD_EXTENSION)
-
-## Converts Rd to HTML
-%.html: %.Rd
-	@Rscript --quiet -e 'rmarkdown::render("$<")'
+	@rm -rf $(DOCS_DIR)
+	@rm -rf $(MAN_DIR)
 
 ## Creates roxygen documentation
 man:
-	@rm -rf $(MAN_DIR)/*$(RD_EXTENSION)
-	@Rscript --quiet -e 'devtools::document()'
+	Rscript --quiet -e 'devtools::document()'
 
 ## Updates package website
-docs: 
-	@Rscript 'pkgdown::build_site()'
+docs : 
+	Rscript --quiet -e 'pkgdown::build_site()'
 
-## List all files
-list_html:
-	@echo $(Rd_FILES)
-	@printf "\n"
-	@echo $(HTML_FILES)
+
+.PHONY: docs man
 
 ##############################################################################
 # Self Documenting Commands                                                  #
