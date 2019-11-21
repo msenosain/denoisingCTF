@@ -8,7 +8,6 @@
 #' a class column will be outputted. After the merge, files can be normalized
 #' using a bead normalization software.
 #'
-#' @export
 BeadsIDmerge <- function(){
     files_list <- list.files(pattern='.FCS|.fcs')
     smp <- flowCore::read.FCS(files_list[1], transformation = FALSE)
