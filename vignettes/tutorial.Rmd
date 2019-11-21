@@ -9,9 +9,8 @@ vignette: >
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  eval = FALSE
+  collapse = TRUE
+  #comment = ""
 )
 ```
 
@@ -24,7 +23,7 @@ main function.
 You will need to install the `devtools` CRAN package. All other dependencies 
 will be automatically installed with the package installation.
 
-```{r}
+```{r, eval = FALSE}
 # Install devtools
 install.packages("devtools")
 
@@ -42,21 +41,169 @@ package (See functions [`paneleditor_GUI`](https://github.com/ParkerICI/premessa
 and [`normalizer_GUI`](https://github.com/ParkerICI/premessa#bead-based-normalization)).
 
 
-
 ## Denoising CyTOF data
 
-This function will remove zeros, beads and debris from the FCS files in the 
+The `rm_noise` function will remove zeros, beads and debris from the FCS files in the 
 current working directory using previously trained models. 
-
-First, a prompt will ask the user for the "Mandatory markers", which can be any
-marker that _should_ be expressed in the cells (e.g. post-fixation DNA intercalator).
-Any cell/event/row that has zero expression of this marker is removed.
-
-Then, a second prompt will ask the user for the "Optional markers", which can 
-be markers used for cell type identification. In this case, any cell/event/row
-that has zero expression of _all_ this markers, meaning that it cannot be 
-identified as any existing cell type, is removed.
-
-```{r setup}
-library(denoisingCTF)
+```{r, eval = FALSE}
+denoisingCTF::rm_noise()
 ```
+
+After printing the list of column names with the index number, a first prompt 
+will ask the user for the "mandatory" markers, which can be any marker that 
+_should_ be expressed in the cells (e.g. post-fixation DNA intercalator). Any 
+cell/event/row that has zero expression of this marker is removed. In this example
+our "mandatory" marker is Histone H3: `##[52,] "Yb176Di_176Yb_His-H3"`.
+```{r, echo=FALSE}
+files_list <- list.files(pattern='.fcs|.FCS')
+smp <- flowCore::read.FCS(files_list[1], transformation = FALSE)
+descrp <- smp@parameters@data$desc
+smp <- data.frame(smp@exprs)
+col_nms <- colnames(smp)
+
+# Ask for channels to remove zeros
+cn <- as.matrix(paste0(col_nms, '_', descrp))
+print(cn)
+prompt1 <- "Enter the column INDICES of the 'mandatory' markers (separated by single space only, no comas allowed)"
+mand_idx <- as.numeric(strsplit(readline(prompt1), " ")[[1]])
+```
+
+A second prompt will ask the user for the "optional" markers, which can 
+be markers used for cell type identification. 
+
+```{r, echo=FALSE}
+prompt2 <- "Enter the column INDICES of the 'optional' markers (separated by single space only, no comas allowed) \n"
+opt_idx <- as.numeric(strsplit(readline(prompt2), " ")[[1]])
+```
+
+Any cell/event/row that has zero expression of _all_ this markers, 
+meaning that it cannot be identified as any existing cell type, 
+is removed. In this example our "optional" markers are the following:
+
+* `## [15,] "Pr141Di_141Pr_EpCAM"`
+* `## [20,] "Nd145Di_145Nd_CD31"`
+* `## [29,] "Sm154Di_154Sm_CD45"`
+* `## [31,] "Gd156Di_156Gd_Vimentin"`
+* `## [34,] "Tb159Di_159Tb_CD4"`
+* `## [37,] "Dy161Di_161Dy_Cytokeratin"`
+* `## [40,] "Dy164Di_164Dy_CK7"`
+* `## [44,] "Er168Di_168Er_CD8"`
+* `## [46,] "Yb170Di_170Yb_CD3"`
+* `## [47,] "Yb171Di_171Yb_CD11b"`
+* `## [49,] "Yb173Di_173Yb_CD90"`
+
+The next prompt will ask the user for the beads channels column indices, 
+and the last prompt will ask for the Gaussian parameters channels and the
+intact-cells marker channel. The latter could be any marker used to 
+distinguish dead cells from live cells, such as a DNA intercalator post-fixation 
+(e.g. iridium) or an antibody for DNA protein (e.g. Histone H3).
+This will be used as input features for the beads model and the debris 
+model, respectively. Events classified as beads or debris will be removed.
+```{r, echo=FALSE}
+prompt <- "Enter the column INDICES of the beads channels Ce140, Eu151, Eu153, Ho165, Lu175 (separated by single space only, no comas allowed) \n"
+ft_beads <- col_nms[as.numeric(strsplit(readline(prompt), " ")[[1]])]
+```
+
+```{r, echo=FALSE}
+prompt <- "Enter the column INDICES of the gaussian parameters channels 'Event_length', 'Center', 'Offset', 'Residual', 'Width' and intact-cells marker channel (separated by single space only, no comas allowed) \n"
+ft_debris <- col_nms[as.numeric(strsplit(readline(prompt), " ")[[1]])]
+```
+
+Finally, this function will create a new directory called _output_ which will
+contain the newly written FCS files after noise removal. Additionally,
+within the output folder you will find a folder called _noiseCL_ containing
+CSV files with the original data and the added columns _beads_ and _debris_
+in which 0 means negative and 1 means positive for beads/noise (0 could be
+interpreted as 'cells'). The user can use the CSV files to assess the 
+accuracy of the classification if needed. 
+
+See below for an example of the output's directory structure:
+
+```{r, echo=FALSE}
+fs::dir_tree()
+```
+
+## Model training
+The `rm_noise` function can take new models as input in the arguments
+`model_beads` and `model_debris` when `use.current.model.beads=FALSE` and 
+`use.current.model.debris=FALSE`, respectively. In this section, you will see
+step by step how can you build training and test data sets and train
+new models.
+
+I would advise to always train and use your own models because these may be 
+sensible to bead normalization. Also, because:
+* you may have a different strategy to identify debris and dead cells.
+* you may have used a different set of normalization beads.
+
+### Beads model
+__1. Build training and test datasets__
+You should set up your working directory to the folder that contains your
+FCS files of interest. 
+```{r, eval = FALSE}
+setwd("~/Documents/My_CyTOF_Files")
+```
+
+The `Beads_TrainTest` function will select a random sample from your FCS files 
+(length specified in `sample_size` argument), and a promt will ask the user 
+for the beads channels column indices.
+```{r, eval = FALSE}
+denoisingCTF::Beads_TrainTest(sample_size = 20, method = 'k_means', 
+    bsample = 5000, class_col = 'BeadsSmp_ID', ...)
+```
+
+```{r, echo=FALSE}
+prompt <- "Enter the column INDICES of the beads channels (separated by single space only, no comas allowed) \n"
+beads_ch <- as.numeric(strsplit(readline(prompt), " ")[[1]]) 
+```
+
+Then it will apply _arcsinh_ tranformation (cofactor=5) and perform an 
+unsupervised detection of the beads using a clustering method, which can 
+be either by _k-means_ or _Gaussian Mixture Models_. 
+Clustering results will be evaluated and only the files in which the 
+events identified as beads show a coefficient of variation (CV) <0.05 will
+be selected to be part of the training and test sets. In all cases, the 
+function writes a CSV file with the summary statistics, labeled 
+`filename_beadsstats.csv` for a file that passed the test, or 
+`filename__FAILEDbeadsstats.csv` for a file in which the clustering failed 
+to identify the beads correctly.
+
+Since CyTOF experiments usually render a large number of events (sometimes
+more than a million) and we do not need that many events to train a model;
+the function will take a random sample of the files for which the 
+clustering was successful. This will be a balanced sample, having `bsample` 
+number of events per class. If `bsample` is larger than the amount of events 
+available for that class then `replacement=TRUE`. 
+
+From the __n__ 'good' files, 0.75 will be randomly pulled for the training set
+and the remaining 0.25 will be the test set (default). The proportion can be 
+changed by passing the argument `s_train`, which determines the size of the 
+fraction that goes into the training set (any number between 0:1).
+
+
+Finally, the function writes a `.RData` file that includes:
+
+* `train_set`: a `data.frame` with the training set.
+* `test_set`: a `data.frame` with the test set.
+* `train_nms`: a character vector with the names of the files used as they appear 
+in `train_set`. Can be interpreted as row names of `train_set`.
+* `test_nms`: a character vector with the names of the files used as they appear 
+in `test_set`. Can be interpreted as row names of `test_set`.
+
+__2. Model training__
+To train the new beads model use the `TrainModel` function. You can specify which
+algorithm to use in the argument `alg` (see documentation for details). 
+```{r, eval = FALSE}
+denoisingCTF::TrainModel(train_set, test_set, alg = 'all', class_col = 'BeadsSmp_ID', 
+    seed = 40, name_0 = 'cells', name_1 = 'beads', label = 'beads',
+    allowParallel = T, free_cores = 2)
+```
+This function will write a `.RData` file that includes:
+
+* `model_alg`: the trained model.
+* `ftimp_alg`: feature importance.
+* `pred_alg`: the predicted classes for the test set.
+* `conf_alg`: the confusion matrix from the test set prediction.
+
+### Debris model
+
+
