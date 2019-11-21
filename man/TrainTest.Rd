@@ -2,7 +2,7 @@
 % Please edit documentation in R/model_building.R
 \name{TrainTest}
 \alias{TrainTest}
-\title{Generates datasets for model training}
+\title{Get datasets for model training}
 \usage{
 TrainTest(
   dt_ls,

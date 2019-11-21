@@ -198,7 +198,7 @@ in `test_set`. Can be interpreted as row names of `test_set`.
 
 __2. Model training__
 To train the new beads model use the `TrainModel` function. You can specify which
-algorithm to use in the argument `alg` (see [documentation](https://rmarkdown.rstudio.com/lesson-8.html)) for details). 
+algorithm to use in the argument `alg` (see [documentation](https://msenosain.github.io/denoisingCTF/reference/TrainTest.html)) for details). 
 
 
 ```{r, eval = FALSE}
