@@ -1,6 +1,6 @@
-# denoisingCTF: a CyTOF denoising pipeline
+# denoisingCTF: a CyTOF denoising R package
 
-Here we present a noise removal pipeline for CyTOF data. You can either use the 
+Here we present a noise removal R package for CyTOF data. You can either use the 
 main function `rm_noise` to remove the noise applying the current trained models,
 or train your own models and then call them into the main function.
 

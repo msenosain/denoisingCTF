@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 # https://philmikejones.me/tutorials/2015-05-20-set-root-directory-knitr/ 
 # Knitr, by default, looks in the same directory as your .Rmd file 
 # This changes the wd to look for other files
-knitr::opts_knit$set(root.dir = "../inst/doc/example")
+knitr::opts_knit$set(root.dir = "../inst/doc/example_tutorial")
 ```
 
 This tutorial will guide you through the usage of the main functions of the 
@@ -214,6 +214,7 @@ This function will write a `.RData` file that includes:
 
 ### Debris model
 __1. Build training and test datasets__
+
 The function `pre_gate` will preprocess the data by:
 
 * Removing zeros (as explained above for 'mandatory' and 'optional' markers)
@@ -226,10 +227,11 @@ denoisingCTF::pre_gate(sample_size=30, model_beads=model_beads, alg_bd = 'RF')
 
 The function will write new FCS files in a folder called 'toy_debris'.
 The user will then use their preferred strategy to "gate out" the debris and
-dead cells. Here, we used Fluidigm recommendations and our marker for 
-intact cells:
+dead cells. Here we used [Fluidigm](http://cytoforum.stanford.edu/viewtopic.php?f=3&t=709)
+recommendations and our marker for intact cells:
 
-include image
+
+![__Manual gating example__](../inst/doc/figs/tutorial/tutorial_fig1.jpg){width=100%}
 
 Once that is done, download your gated files (noise is already removed) into
 a new folder inside the 'toy_debris' directory. The `post_gate` function will
@@ -244,7 +246,8 @@ denoisingCTF::post_gate(bsample = 5000, path_pregated = '../')
 
 
 __2. Model training__
-This is exactly the same as for the beads model training but changing some labels:
+
+This is exactly the same as for the beads model training but using as training features the channels you used to gate the noise out and changing some labels:
 ```{r, eval = FALSE}
 denoisingCTF::TrainModel(train_set, test_set, alg = 'all', class_col = 'GP_Noise', 
     seed = 40, name_0 = 'cells', name_1 = 'debris', label = 'debris', 

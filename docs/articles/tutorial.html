@@ -270,18 +270,22 @@
 <div id="debris-model" class="section level3">
 <h3 class="hasAnchor">
 <a href="#debris-model" class="anchor"></a>Debris model</h3>
-<p><strong>1. Build training and test datasets</strong> The function <code>pre_gate</code> will preprocess the data by:</p>
+<p><strong>1. Build training and test datasets</strong></p>
+<p>The function <code>pre_gate</code> will preprocess the data by:</p>
 <ul>
 <li>Removing zeros (as explained above for ‘mandatory’ and ‘optional’ markers)</li>
 <li>Removing beads (using beads model)</li>
 <li>Adding a row ID column</li>
 </ul>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/pre_gate.html">pre_gate</a></span>(<span class="dt">sample_size=</span><span class="dv">30</span>, <span class="dt">model_beads=</span>model_beads, <span class="dt">alg_bd =</span> <span class="st">'RF'</span>)</a></code></pre></div>
-<p>The function will write new FCS files in a folder called ‘toy_debris’. The user will then use their preferred strategy to “gate out” the debris and dead cells. Here, we used Fluidigm recommendations and our marker for intact cells:</p>
-<p>include image</p>
+<p>The function will write new FCS files in a folder called ‘toy_debris’. The user will then use their preferred strategy to “gate out” the debris and dead cells. Here we used <a href="http://cytoforum.stanford.edu/viewtopic.php?f=3&amp;t=709">Fluidigm</a> recommendations and our marker for intact cells:</p>
+<div class="figure">
+<img src="../inst/doc/figs/tutorial/tutorial_fig1.jpg" alt="Manual gating example" style="width:100.0%"><p class="caption"><strong>Manual gating example</strong></p>
+</div>
 <p>Once that is done, download your gated files (noise is already removed) into a new folder inside the ‘toy_debris’ directory. The <code>post_gate</code> function will compare pre- and post-gated files, label noise and generate training and test datasets. As explained above, <code>bsample</code> is the size of the random sample to be taken from each class. The function will write a <code>.RData</code> file with the same content explained above, but this time the class column will be named <code>GP_Noise</code>.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/post_gate.html">post_gate</a></span>(<span class="dt">bsample =</span> <span class="dv">5000</span>, <span class="dt">path_pregated =</span> <span class="st">'../'</span>) </a></code></pre></div>
-<p><strong>2. Model training</strong> This is exactly the same as for the beads model training but changing some labels:</p>
+<p><strong>2. Model training</strong></p>
+<p>This is exactly the same as for the beads model training but using as training features the channels you used to gate the noise out and changing some labels:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/TrainModel.html">TrainModel</a></span>(train_set, test_set, <span class="dt">alg =</span> <span class="st">'all'</span>, <span class="dt">class_col =</span> <span class="st">'GP_Noise'</span>, </a>
 <a class="sourceLine" id="cb14-2" data-line-number="2">    <span class="dt">seed =</span> <span class="dv">40</span>, <span class="dt">name_0 =</span> <span class="st">'cells'</span>, <span class="dt">name_1 =</span> <span class="st">'debris'</span>, <span class="dt">label =</span> <span class="st">'debris'</span>, </a>
 <a class="sourceLine" id="cb14-3" data-line-number="3">    <span class="dt">allowParallel =</span> T, <span class="dt">free_cores =</span> <span class="dv">2</span>)</a></code></pre></div>
