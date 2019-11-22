@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 # https://philmikejones.me/tutorials/2015-05-20-set-root-directory-knitr/ 
 # Knitr, by default, looks in the same directory as your .Rmd file 
 # This changes the wd to look for other files
-knitr::opts_knit$set(root.dir = "../../../../test_CyTOF/test2")
+knitr::opts_knit$set(root.dir = "../inst/doc/example")
 ```
 
 This tutorial will guide you through the usage of the main functions of the 
@@ -181,7 +181,7 @@ clustering was successful. This will be a balanced sample, having `bsample`
 number of events per class. If `bsample` is larger than the amount of events 
 available for that class then `replacement=TRUE`. 
 
-From the __n__ 'good' files, 0.75 will be randomly pulled for the training set
+From the _n_ 'good' files, 0.75 will be randomly pulled for the training set
 and the remaining 0.25 will be the test set (default). The proportion can be 
 changed by passing the argument `s_train`, which determines the size of the 
 fraction that goes into the training set (any number between 0:1).
@@ -200,7 +200,6 @@ __2. Model training__
 To train the new beads model use the `TrainModel` function. You can specify which
 algorithm to use in the argument `alg` (see [documentation](https://msenosain.github.io/denoisingCTF/reference/TrainTest.html)) for details). 
 
-
 ```{r, eval = FALSE}
 denoisingCTF::TrainModel(train_set, test_set, alg = 'all', class_col = 'BeadsSmp_ID', 
     seed = 40, name_0 = 'cells', name_1 = 'beads', label = 'beads',
@@ -214,5 +213,40 @@ This function will write a `.RData` file that includes:
 * `conf_alg`: the confusion matrix from the test set prediction.
 
 ### Debris model
+__1. Build training and test datasets__
+The function `pre_gate` will preprocess the data by:
 
-test test
+* Removing zeros (as explained above for 'mandatory' and 'optional' markers)
+* Removing beads (using beads model)
+* Adding a row ID column
+
+```{r, eval = FALSE}
+denoisingCTF::pre_gate(sample_size=30, model_beads=model_beads, alg_bd = 'RF')
+```
+
+The function will write new FCS files in a folder called 'toy_debris'.
+The user will then use their preferred strategy to "gate out" the debris and
+dead cells. Here, we used Fluidigm recommendations and our marker for 
+intact cells:
+
+include image
+
+Once that is done, download your gated files (noise is already removed) into
+a new folder inside the 'toy_debris' directory. The `post_gate` function will
+compare pre- and post-gated files, label noise and generate training and test
+datasets. As explained above, `bsample` is the size of the random sample to be
+taken from each class. The function will write a `.RData` file with the same 
+content explained above, but this time the class column will be named `GP_Noise`.
+
+```{r, eval = FALSE}
+denoisingCTF::post_gate(bsample = 5000, path_pregated = '../') 
+```
+
+
+__2. Model training__
+This is exactly the same as for the beads model training but changing some labels:
+```{r, eval = FALSE}
+denoisingCTF::TrainModel(train_set, test_set, alg = 'all', class_col = 'GP_Noise', 
+    seed = 40, name_0 = 'cells', name_1 = 'debris', label = 'debris', 
+    allowParallel = T, free_cores = 2)
+```

@@ -239,7 +239,7 @@
 <pre><code>## Enter the column INDICES of the beads channels (separated by single space only, no comas allowed)</code></pre>
 <p>Then it will apply <em>arcsinh</em> tranformation (cofactor=5) and perform an unsupervised detection of the beads using a clustering method, which can be either by <em>k-means</em> or <em>Gaussian Mixture Models</em>. Clustering results will be evaluated and only the files in which the events identified as beads show a coefficient of variation (CV) &lt;0.05 will be selected to be part of the training and test sets. In all cases, the function writes a CSV file with the summary statistics, labeled <code>filename_beadsstats.csv</code> for a file that passed the test, or <code>filename__FAILEDbeadsstats.csv</code> for a file in which the clustering failed to identify the beads correctly.</p>
 <p>Since CyTOF experiments usually render a large number of events (sometimes more than a million) and we do not need that many events to train a model; the function will take a random sample of the files for which the clustering was successful. This will be a balanced sample, having <code>bsample</code> number of events per class. If <code>bsample</code> is larger than the amount of events available for that class then <code>replacement=TRUE</code>.</p>
-<p>From the <strong>n</strong> ‘good’ files, 0.75 will be randomly pulled for the training set and the remaining 0.25 will be the test set (default). The proportion can be changed by passing the argument <code>s_train</code>, which determines the size of the fraction that goes into the training set (any number between 0:1).</p>
+<p>From the <em>n</em> ‘good’ files, 0.75 will be randomly pulled for the training set and the remaining 0.25 will be the test set (default). The proportion can be changed by passing the argument <code>s_train</code>, which determines the size of the fraction that goes into the training set (any number between 0:1).</p>
 <p>Finally, the function writes a <code>.RData</code> file that includes:</p>
 <ul>
 <li>
@@ -270,7 +270,21 @@
 <div id="debris-model" class="section level3">
 <h3 class="hasAnchor">
 <a href="#debris-model" class="anchor"></a>Debris model</h3>
-<p>test test</p>
+<p><strong>1. Build training and test datasets</strong> The function <code>pre_gate</code> will preprocess the data by:</p>
+<ul>
+<li>Removing zeros (as explained above for ‘mandatory’ and ‘optional’ markers)</li>
+<li>Removing beads (using beads model)</li>
+<li>Adding a row ID column</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/pre_gate.html">pre_gate</a></span>(<span class="dt">sample_size=</span><span class="dv">30</span>, <span class="dt">model_beads=</span>model_beads, <span class="dt">alg_bd =</span> <span class="st">'RF'</span>)</a></code></pre></div>
+<p>The function will write new FCS files in a folder called ‘toy_debris’. The user will then use their preferred strategy to “gate out” the debris and dead cells. Here, we used Fluidigm recommendations and our marker for intact cells:</p>
+<p>include image</p>
+<p>Once that is done, download your gated files (noise is already removed) into a new folder inside the ‘toy_debris’ directory. The <code>post_gate</code> function will compare pre- and post-gated files, label noise and generate training and test datasets. As explained above, <code>bsample</code> is the size of the random sample to be taken from each class. The function will write a <code>.RData</code> file with the same content explained above, but this time the class column will be named <code>GP_Noise</code>.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/post_gate.html">post_gate</a></span>(<span class="dt">bsample =</span> <span class="dv">5000</span>, <span class="dt">path_pregated =</span> <span class="st">'../'</span>) </a></code></pre></div>
+<p><strong>2. Model training</strong> This is exactly the same as for the beads model training but changing some labels:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/TrainModel.html">TrainModel</a></span>(train_set, test_set, <span class="dt">alg =</span> <span class="st">'all'</span>, <span class="dt">class_col =</span> <span class="st">'GP_Noise'</span>, </a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">    <span class="dt">seed =</span> <span class="dv">40</span>, <span class="dt">name_0 =</span> <span class="st">'cells'</span>, <span class="dt">name_1 =</span> <span class="st">'debris'</span>, <span class="dt">label =</span> <span class="st">'debris'</span>, </a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">    <span class="dt">allowParallel =</span> T, <span class="dt">free_cores =</span> <span class="dv">2</span>)</a></code></pre></div>
 </div>
 </div>
   </div>
