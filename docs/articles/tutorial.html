@@ -103,7 +103,7 @@
 <a href="#denoising-cytof-data" class="anchor"></a>Denoising CyTOF data</h2>
 <p>The <code>rm_noise</code> function will remove zeros, beads and debris from the FCS files in the current working directory using previously trained models.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/rm_noise.html">rm_noise</a></span>()</a></code></pre></div>
-<p>After printing the list of column names with the index number, a first prompt will ask the user for the “mandatory” markers, which can be any marker that <em>should</em> be expressed in the cells (e.g. post-fixation DNA intercalator). Any cell/event/row that has zero expression of this marker is removed. In this example our “mandatory” marker is Histone H3: <code>##[52,] "Yb176Di_176Yb_His-H3"</code>.</p>
+<p>After printing the list of column names with the index number, a first prompt will ask the user for the “mandatory” markers, which can be any marker that <em>should</em> be expressed in the cells (e.g. post-fixation DNA intercalator).</p>
 <pre><code>##       [,1]                       
 ##  [1,] "Time_Time"                
 ##  [2,] "Event_length_Event_length"
@@ -183,6 +183,10 @@
 ## [76,] "Residual_Residual"        
 ## [77,] "beadDist_beadDist"
 ## Enter the column INDICES of the 'mandatory' markers (separated by single space only, no comas allowed)</code></pre>
+<p>Any cell/event/row that has zero expression of this marker is removed. In this example our “mandatory” marker is Histone H3:</p>
+<ul>
+<li><code>##[52,] "Yb176Di_176Yb_His-H3"</code></li>
+</ul>
 <p>A second prompt will ask the user for the “optional” markers, which can be markers used for cell type identification.</p>
 <pre><code>## Enter the column INDICES of the 'optional' markers (separated by single space only, no comas allowed)</code></pre>
 <p>Any cell/event/row that has zero expression of <em>all</em> this markers, meaning that it cannot be identified as any existing cell type, is removed. In this example our “optional” markers are the following:</p>

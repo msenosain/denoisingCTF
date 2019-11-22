@@ -58,9 +58,7 @@ denoisingCTF::rm_noise()
 
 After printing the list of column names with the index number, a first prompt 
 will ask the user for the "mandatory" markers, which can be any marker that 
-_should_ be expressed in the cells (e.g. post-fixation DNA intercalator). Any 
-cell/event/row that has zero expression of this marker is removed. In this example
-our "mandatory" marker is Histone H3: `##[52,] "Yb176Di_176Yb_His-H3"`.
+_should_ be expressed in the cells (e.g. post-fixation DNA intercalator). 
 ```{r, echo=FALSE}
 files_list <- list.files(pattern='.fcs|.FCS')
 smp <- flowCore::read.FCS(files_list[1], transformation = FALSE)
@@ -74,6 +72,11 @@ print(cn)
 prompt1 <- "Enter the column INDICES of the 'mandatory' markers (separated by single space only, no comas allowed)"
 mand_idx <- as.numeric(strsplit(readline(prompt1), " ")[[1]])
 ```
+
+Any cell/event/row that has zero expression of this marker is removed. In this example
+our "mandatory" marker is Histone H3: 
+
+* `##[52,] "Yb176Di_176Yb_His-H3"`
 
 A second prompt will ask the user for the "optional" markers, which can 
 be markers used for cell type identification. 
