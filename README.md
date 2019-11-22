@@ -72,9 +72,9 @@ TrainModel(train_set, test_set, alg = 'all', class_col = 'GP_Noise',
 For a detailed example, see our [tutorial](https://msenosain.github.io/denoisingCTF/articles/tutorial.html).
 
 
-## Debris and Beads model training and evaluation
+## Debris and beads models evaluation
 
-For further details on these models, click here.
+For further details on these models, click [here](https://msenosain.github.io/denoisingCTF/articles/models_eval.html).
 
 
 
