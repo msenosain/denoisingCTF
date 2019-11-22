@@ -1,0 +1,20 @@
+---
+title: "Debris and beads models evaluation"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE
+  #comment = ""
+)
+```
+
+```{r setup, include = FALSE, echo=FALSE}
+knitr::opts_knit$set(root.dir = "../data")
+```
+
