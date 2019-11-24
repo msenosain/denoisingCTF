@@ -1,4 +1,4 @@
-![](https://img.shields.io/badge/Github-Repo-green)
+[![](https://img.shields.io/badge/Github-Repo-green)](https://github.com/msenosain/denoisingCTF)
 
 # denoisingCTF: a CyTOF denoising R package
 
