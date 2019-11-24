@@ -1,3 +1,5 @@
+![](https://img.shields.io/badge/Github-Repo-green)
+
 # denoisingCTF: a CyTOF denoising R package
 
 Here we present a noise removal R package for CyTOF data. You can either use the 
