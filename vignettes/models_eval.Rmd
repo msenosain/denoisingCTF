@@ -15,6 +15,115 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup, include = FALSE, echo=FALSE}
-knitr::opts_knit$set(root.dir = "../data")
+knitr::opts_knit$set(root.dir = "../inst/doc/model_eval")
 ```
 
+```{r, include = FALSE, echo=FALSE}
+load('beads_TrainTest.RData') 
+load('beads_RFmodel.RData')
+```
+
+## Beads model evaluation
+The diagram below shows the strategy to build the training and test sets for the 
+beads classification model. A total of 170 000 and 60 000 events (i.e. cells, rows) were used for training and test sets, respectively. 
+
+![__Beads training and test sets__](../inst/doc/figs/model_eval/fig1_beads_ds.jpg){width=100%}
+
+As previously explained, we used the `Beads_TrainTest` function to obtain training and test data sets.
+```{r, eval = FALSE}
+denoisingCTF::Beads_TrainTest(sample_size = 40, method = 'k_means', 
+    bsample = 5000, class_col = 'BeadsSmp_ID', ...)
+```
+
+We used the `TrainModel` function to train a Random Forest classification model:
+```{r, eval = FALSE}
+denoisingCTF::TrainModel(train_set, test_set, alg = 'RF', class_col = 'BeadsSmp_ID', 
+    seed = 40, name_0 = 'cells', name_1 = 'beads', label = 'beads',
+    allowParallel = T, free_cores = 2)
+```
+
+To tune the training hyperparameters we used repeated 10-fold CV (x3).
+The metrics of the model are shown below:
+
+```{r, echo = FALSE}
+model_rf
+```
+
+```{r, echo = FALSE}
+plot(model_rf)
+```
+
+Feature importance plot:
+
+```{r, echo = FALSE}
+plot(ftimp_rf)
+```
+
+Assessing model accuracy in test set:
+```{r, echo = FALSE}
+conf_rf
+```
+
+```{r}
+
+```
+
+## Debris model evaluation
+
+```{r, include = FALSE, echo=FALSE}
+load('debris_TrainTest.RData') 
+load('debris_RFmodel.RData')
+```
+
+The diagram below shows the strategy to build the training and test sets for the 
+debris classification model. A total of 220 000 and 80 000 events (i.e. cells, rows) were used for training and test sets, respectively. 
+
+![__Debris training and test sets__](../inst/doc/figs/model_eval/fig2_debris_ds.jpg){width=100%}
+
+As previously explained, we used the `pre_gate` function to perform row indexing which 
+is needed when comparing pre-gated and post-gated files (the latter are manually gated
+using user's preferred platform (e.g. Cytobank, FlowJo)) to successfully label debris
+and obtain training and test data sets with the `post_gate` function.
+
+```{r, eval = FALSE}
+# Removal of zeros, beads and addition of row ID column
+denoisingCTF::pre_gate(sample_size=30, model_beads=model_beads, alg_bd = 'RF') 
+
+# Manually gate debris and dead cells using Gaussian Parameters and a live/dead cell marker.
+
+# Comparison of pre-gated and post-gated files, noise labeling and training/testing data sets generation.
+denoisingCTF::post_gate(bsample = 5000, path_pregated = '../') 
+```
+
+We used the `TrainModel` function to train a Random Forest classification model:
+```{r, eval = FALSE}
+denoisingCTF::TrainModel(train_set, test_set, alg = 'RF', class_col = 'GP_Noise', 
+    seed = 40, name_0 = 'cells', name_1 = 'debris', label = 'debris', 
+    allowParallel = T, free_cores = 2)
+```
+
+To tune the training hyperparameters we used repeated 10-fold CV (x3).
+The metrics of the model are shown below:
+
+```{r, echo = FALSE}
+model_rf
+```
+
+```{r, echo = FALSE}
+plot(model_rf)
+```
+
+Feature importance plot:
+
+```{r, echo = FALSE}
+plot(ftimp_rf)
+```
+
+Assessing model accuracy in test set:
+```{r, echo = FALSE}
+conf_rf
+```
+
+```{r}
+
+```

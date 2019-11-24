@@ -19,7 +19,7 @@ man:
 	Rscript --quiet -e 'devtools::document()'
 
 ## Updates package website
-docs : 
+docs : man
 	Rscript --quiet -e 'pkgdown::build_site()'
 
 

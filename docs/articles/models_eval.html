@@ -85,11 +85,156 @@
 
     
     
-
+<div id="beads-model-evaluation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#beads-model-evaluation" class="anchor"></a>Beads model evaluation</h2>
+<p>The diagram below shows the strategy to build the training and test sets for the beads classification model. A total of 170 000 and 60 000 events (i.e. cells, rows) were used for training and test sets, respectively.</p>
+<div class="figure">
+<img src="../inst/doc/figs/model_eval/fig1_beads_ds.jpg" alt="Beads training and test sets" style="width:100.0%"><p class="caption"><strong>Beads training and test sets</strong></p>
+</div>
+<p>As previously explained, we used the <code>Beads_TrainTest</code> function to obtain training and test data sets.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/Beads_TrainTest.html">Beads_TrainTest</a></span>(<span class="dt">sample_size =</span> <span class="dv">40</span>, <span class="dt">method =</span> <span class="st">'k_means'</span>, </a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">    <span class="dt">bsample =</span> <span class="dv">5000</span>, <span class="dt">class_col =</span> <span class="st">'BeadsSmp_ID'</span>, ...)</a></code></pre></div>
+<p>We used the <code>TrainModel</code> function to train a Random Forest classification model:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/TrainModel.html">TrainModel</a></span>(train_set, test_set, <span class="dt">alg =</span> <span class="st">'RF'</span>, <span class="dt">class_col =</span> <span class="st">'BeadsSmp_ID'</span>, </a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">    <span class="dt">seed =</span> <span class="dv">40</span>, <span class="dt">name_0 =</span> <span class="st">'cells'</span>, <span class="dt">name_1 =</span> <span class="st">'beads'</span>, <span class="dt">label =</span> <span class="st">'beads'</span>,</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3">    <span class="dt">allowParallel =</span> T, <span class="dt">free_cores =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p>To tune the training hyperparameters we used repeated 10-fold CV (x3). The metrics of the model are shown below:</p>
+<pre><code>## Random Forest 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold, repeated 3 times) 
+## Summary of sample sizes: 153000, 153000, 153000, 153000, 153000, 153000, ... 
+## Resampling results across tuning parameters:
+## 
+##   mtry  ROC        Sens       Spec     
+##   1     0.9999999  0.9997725  0.9999059
+##   2     0.9999999  0.9997529  0.9998706
+##   3     0.9999999  0.9997529  0.9998627
+##   4     0.9999998  0.9997608  0.9998471
+##   5     0.9999939  0.9997725  0.9998235
+## 
+## ROC was used to select the optimal model using the largest value.
+## The final value used for the model was mtry = 1.</code></pre>
+<p><img src="models_eval_files/figure-html/unnamed-chunk-6-1.png" width="700"></p>
+<p>Feature importance plot:</p>
+<p><img src="models_eval_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
+<p>Assessing model accuracy in test set:</p>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction beads cells
+##      beads 29978     7
+##      cells    22 29993
+##                                           
+##                Accuracy : 0.9995          
+##                  95% CI : (0.9993, 0.9997)
+##     No Information Rate : 0.5             
+##     P-Value [Acc &gt; NIR] : &lt; 2e-16         
+##                                           
+##                   Kappa : 0.999           
+##                                           
+##  Mcnemar's Test P-Value : 0.00933         
+##                                           
+##             Sensitivity : 0.9993          
+##             Specificity : 0.9998          
+##          Pos Pred Value : 0.9998          
+##          Neg Pred Value : 0.9993          
+##               Precision : 0.9998          
+##                  Recall : 0.9993          
+##                      F1 : 0.9995          
+##              Prevalence : 0.5000          
+##          Detection Rate : 0.4996          
+##    Detection Prevalence : 0.4998          
+##       Balanced Accuracy : 0.9995          
+##                                           
+##        'Positive' Class : beads           
+## </code></pre>
+</div>
+<div id="debris-model-evaluation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#debris-model-evaluation" class="anchor"></a>Debris model evaluation</h2>
+<p>The diagram below shows the strategy to build the training and test sets for the debris classification model. A total of 220 000 and 80 000 events (i.e. cells, rows) were used for training and test sets, respectively.</p>
+<div class="figure">
+<img src="../inst/doc/figs/model_eval/fig2_debris_ds.jpg" alt="Debris training and test sets" style="width:100.0%"><p class="caption"><strong>Debris training and test sets</strong></p>
+</div>
+<p>As previously explained, we used the <code>pre_gate</code> function to perform row indexing which is needed when comparing pre-gated and post-gated files (the latter are manually gated using user’s preferred platform (e.g. Cytobank, FlowJo)) to successfully label debris and obtain training and test data sets with the <code>post_gate</code> function.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># Removal of zeros, beads and addition of row ID column</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/pre_gate.html">pre_gate</a></span>(<span class="dt">sample_size=</span><span class="dv">30</span>, <span class="dt">model_beads=</span>model_beads, <span class="dt">alg_bd =</span> <span class="st">'RF'</span>) </a>
+<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co"># Manually gate debris and dead cells using Gaussian Parameters and a live/dead cell marker.</span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co"># Comparison of pre-gated and post-gated files, noise labeling and training/testing data sets generation.</span></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/post_gate.html">post_gate</a></span>(<span class="dt">bsample =</span> <span class="dv">5000</span>, <span class="dt">path_pregated =</span> <span class="st">'../'</span>) </a></code></pre></div>
+<p>We used the <code>TrainModel</code> function to train a Random Forest classification model:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/TrainModel.html">TrainModel</a></span>(train_set, test_set, <span class="dt">alg =</span> <span class="st">'RF'</span>, <span class="dt">class_col =</span> <span class="st">'GP_Noise'</span>, </a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">    <span class="dt">seed =</span> <span class="dv">40</span>, <span class="dt">name_0 =</span> <span class="st">'cells'</span>, <span class="dt">name_1 =</span> <span class="st">'debris'</span>, <span class="dt">label =</span> <span class="st">'debris'</span>, </a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">    <span class="dt">allowParallel =</span> T, <span class="dt">free_cores =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p>To tune the training hyperparameters we used repeated 10-fold CV (x3). The metrics of the model are shown below:</p>
+<pre><code>## Random Forest 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold, repeated 3 times) 
+## Summary of sample sizes: 198000, 198000, 198000, 198000, 198000, 198000, ... 
+## Resampling results across tuning parameters:
+## 
+##   mtry  ROC        Sens       Spec     
+##   1     0.9915637  0.9661152  0.9450848
+##   2     0.9938901  0.9598758  0.9559030
+##   3     0.9939208  0.9595515  0.9560182
+##   4     0.9938796  0.9591818  0.9557818
+##   5     0.9937865  0.9589818  0.9556152
+##   6     0.9935954  0.9585515  0.9552970
+## 
+## ROC was used to select the optimal model using the largest value.
+## The final value used for the model was mtry = 3.</code></pre>
+<p><img src="models_eval_files/figure-html/unnamed-chunk-14-1.png" width="700"></p>
+<p>Feature importance plot:</p>
+<p><img src="models_eval_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
+<p>Assessing model accuracy in test set:</p>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction cells debris
+##     cells  37034    930
+##     debris  2966  39070
+##                                           
+##                Accuracy : 0.9513          
+##                  95% CI : (0.9498, 0.9528)
+##     No Information Rate : 0.5             
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
+##                                           
+##                   Kappa : 0.9026          
+##                                           
+##  Mcnemar's Test P-Value : &lt; 2.2e-16       
+##                                           
+##             Sensitivity : 0.9768          
+##             Specificity : 0.9258          
+##          Pos Pred Value : 0.9294          
+##          Neg Pred Value : 0.9755          
+##               Precision : 0.9294          
+##                  Recall : 0.9768          
+##                      F1 : 0.9525          
+##              Prevalence : 0.5000          
+##          Detection Rate : 0.4884          
+##    Detection Prevalence : 0.5254          
+##       Balanced Accuracy : 0.9513          
+##                                           
+##        'Positive' Class : debris          
+## </code></pre>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
 
+        <div id="tocnav">
+      <h2 class="hasAnchor">
+<a href="#tocnav" class="anchor"></a>Contents</h2>
+      <ul class="nav nav-pills nav-stacked">
+<li><a href="#beads-model-evaluation">Beads model evaluation</a></li>
+      <li><a href="#debris-model-evaluation">Debris model evaluation</a></li>
+      </ul>
+</div>
       </div>
 
 </div>
