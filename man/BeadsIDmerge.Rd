@@ -15,3 +15,4 @@ Files corresponding to the same date will be merged and new FCS files with
 a class column will be outputted. After the merge, files can be normalized
 using a bead normalization software.
 }
+\keyword{internal}
