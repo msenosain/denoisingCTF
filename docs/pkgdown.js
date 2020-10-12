@@ -1,4 +1,6 @@
 /* http://gregfranko.com/blog/jquery-best-practices/ */
+"publishConfig": { "registry": "https://npm.pkg.github.com/" }
+
 (function($) {
   $(function() {
 
