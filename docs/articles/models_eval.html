@@ -6,19 +6,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Debris and beads models evaluation • denoisingCTF</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Debris and beads models evaluation">
-<meta property="og:description" content="">
-<meta name="twitter:card" content="summary">
+<meta property="og:description" content="denoisingCTF">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -72,10 +72,10 @@
 
       
 
-      </header><div class="row">
+      </header><script src="models_eval_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>Debris and beads models evaluation</h1>
+      <h1 data-toc-skip>Debris and beads models evaluation</h1>
             
       
       
@@ -90,15 +90,17 @@
 <a href="#beads-model-evaluation" class="anchor"></a>Beads model evaluation</h2>
 <p>The diagram below shows the strategy to build the training and test sets for the beads classification model. A total of 170 000 and 60 000 events (i.e. cells, rows) were used for training and test sets, respectively.</p>
 <div class="figure">
-<img src="../inst/doc/figs/model_eval/fig1_beads_ds.jpg" alt="Beads training and test sets" style="width:100.0%"><p class="caption"><strong>Beads training and test sets</strong></p>
+<img src="../inst/doc/figs/model_eval/fig1_beads_ds.jpg" style="width:100.0%" alt=""><p class="caption"><strong>Beads training and test sets</strong></p>
 </div>
 <p>As previously explained, we used the <code>Beads_TrainTest</code> function to obtain training and test data sets.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/Beads_TrainTest.html">Beads_TrainTest</a></span>(<span class="dt">sample_size =</span> <span class="dv">40</span>, <span class="dt">method =</span> <span class="st">'k_means'</span>, </a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">    <span class="dt">bsample =</span> <span class="dv">5000</span>, <span class="dt">class_col =</span> <span class="st">'BeadsSmp_ID'</span>, ...)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">denoisingCTF</span><span class="fu">::</span><span class="fu"><a href="../reference/Beads_TrainTest.html">Beads_TrainTest</a></span><span class="op">(</span>sample_size <span class="op">=</span> <span class="fl">40</span>, method <span class="op">=</span> <span class="st">'k_means'</span>, 
+    bsample <span class="op">=</span> <span class="fl">5000</span>, class_col <span class="op">=</span> <span class="st">'BeadsSmp_ID'</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
 <p>We used the <code>TrainModel</code> function to train a Random Forest classification model:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/TrainModel.html">TrainModel</a></span>(train_set, test_set, <span class="dt">alg =</span> <span class="st">'RF'</span>, <span class="dt">class_col =</span> <span class="st">'BeadsSmp_ID'</span>, </a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">    <span class="dt">seed =</span> <span class="dv">40</span>, <span class="dt">name_0 =</span> <span class="st">'cells'</span>, <span class="dt">name_1 =</span> <span class="st">'beads'</span>, <span class="dt">label =</span> <span class="st">'beads'</span>,</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3">    <span class="dt">allowParallel =</span> T, <span class="dt">free_cores =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">denoisingCTF</span><span class="fu">::</span><span class="fu"><a href="../reference/TrainModel.html">TrainModel</a></span><span class="op">(</span><span class="va">train_set</span>, <span class="va">test_set</span>, alg <span class="op">=</span> <span class="st">'RF'</span>, class_col <span class="op">=</span> <span class="st">'BeadsSmp_ID'</span>, 
+    seed <span class="op">=</span> <span class="fl">40</span>, name_0 <span class="op">=</span> <span class="st">'cells'</span>, name_1 <span class="op">=</span> <span class="st">'beads'</span>, label <span class="op">=</span> <span class="st">'beads'</span>,
+    allowParallel <span class="op">=</span> <span class="cn">T</span>, free_cores <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <p>To tune the training hyperparameters we used repeated 10-fold CV (x3). The metrics of the model are shown below:</p>
 <pre><code>## Random Forest 
 ## 
@@ -156,20 +158,22 @@
 <a href="#debris-model-evaluation" class="anchor"></a>Debris model evaluation</h2>
 <p>The diagram below shows the strategy to build the training and test sets for the debris classification model. A total of 220 000 and 80 000 events (i.e. cells, rows) were used for training and test sets, respectively.</p>
 <div class="figure">
-<img src="../inst/doc/figs/model_eval/fig2_debris_ds.jpg" alt="Debris training and test sets" style="width:100.0%"><p class="caption"><strong>Debris training and test sets</strong></p>
+<img src="../inst/doc/figs/model_eval/fig2_debris_ds.jpg" style="width:100.0%" alt=""><p class="caption"><strong>Debris training and test sets</strong></p>
 </div>
 <p>As previously explained, we used the <code>pre_gate</code> function to perform row indexing which is needed when comparing pre-gated and post-gated files (the latter are manually gated using user’s preferred platform (e.g. Cytobank, FlowJo)) to successfully label debris and obtain training and test data sets with the <code>post_gate</code> function.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="co"># Removal of zeros, beads and addition of row ID column</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/pre_gate.html">pre_gate</a></span>(<span class="dt">sample_size=</span><span class="dv">30</span>, <span class="dt">model_beads=</span>model_beads, <span class="dt">alg_bd =</span> <span class="st">'RF'</span>) </a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="co"># Manually gate debris and dead cells using Gaussian Parameters and a live/dead cell marker.</span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co"># Comparison of pre-gated and post-gated files, noise labeling and training/testing data sets generation.</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/post_gate.html">post_gate</a></span>(<span class="dt">bsample =</span> <span class="dv">5000</span>, <span class="dt">path_pregated =</span> <span class="st">'../'</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Removal of zeros, beads and addition of row ID column</span>
+<span class="fu">denoisingCTF</span><span class="fu">::</span><span class="fu"><a href="../reference/pre_gate.html">pre_gate</a></span><span class="op">(</span>sample_size<span class="op">=</span><span class="fl">30</span>, model_beads<span class="op">=</span><span class="va">model_beads</span>, alg_bd <span class="op">=</span> <span class="st">'RF'</span><span class="op">)</span> 
+
+<span class="co"># Manually gate debris and dead cells using Gaussian Parameters and a live/dead cell marker.</span>
+
+<span class="co"># Comparison of pre-gated and post-gated files, noise labeling and training/testing data sets generation.</span>
+<span class="fu">denoisingCTF</span><span class="fu">::</span><span class="fu"><a href="../reference/post_gate.html">post_gate</a></span><span class="op">(</span>bsample <span class="op">=</span> <span class="fl">5000</span>, path_pregated <span class="op">=</span> <span class="st">'../'</span><span class="op">)</span> </code></pre></div>
 <p>We used the <code>TrainModel</code> function to train a Random Forest classification model:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/TrainModel.html">TrainModel</a></span>(train_set, test_set, <span class="dt">alg =</span> <span class="st">'RF'</span>, <span class="dt">class_col =</span> <span class="st">'GP_Noise'</span>, </a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">    <span class="dt">seed =</span> <span class="dv">40</span>, <span class="dt">name_0 =</span> <span class="st">'cells'</span>, <span class="dt">name_1 =</span> <span class="st">'debris'</span>, <span class="dt">label =</span> <span class="st">'debris'</span>, </a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">    <span class="dt">allowParallel =</span> T, <span class="dt">free_cores =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">denoisingCTF</span><span class="fu">::</span><span class="fu"><a href="../reference/TrainModel.html">TrainModel</a></span><span class="op">(</span><span class="va">train_set</span>, <span class="va">test_set</span>, alg <span class="op">=</span> <span class="st">'RF'</span>, class_col <span class="op">=</span> <span class="st">'GP_Noise'</span>, 
+    seed <span class="op">=</span> <span class="fl">40</span>, name_0 <span class="op">=</span> <span class="st">'cells'</span>, name_1 <span class="op">=</span> <span class="st">'debris'</span>, label <span class="op">=</span> <span class="st">'debris'</span>, 
+    allowParallel <span class="op">=</span> <span class="cn">T</span>, free_cores <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <p>To tune the training hyperparameters we used repeated 10-fold CV (x3). The metrics of the model are shown below:</p>
 <pre><code>## Random Forest 
 ## 
@@ -225,17 +229,11 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#beads-model-evaluation">Beads model evaluation</a></li>
-      <li><a href="#debris-model-evaluation">Debris model evaluation</a></li>
-      </ul>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
 
@@ -246,7 +244,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

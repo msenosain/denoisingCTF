@@ -6,19 +6,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>denoisingCTF Tutorial • denoisingCTF</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="denoisingCTF Tutorial">
-<meta property="og:description" content="">
-<meta name="twitter:card" content="summary">
+<meta property="og:description" content="denoisingCTF">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -39,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -72,10 +72,10 @@
 
       
 
-      </header><div class="row">
+      </header><script src="tutorial_files/header-attrs-2.6/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>denoisingCTF Tutorial</h1>
+      <h1 data-toc-skip>denoisingCTF Tutorial</h1>
             
       
       
@@ -90,11 +90,12 @@
 <h2 class="hasAnchor">
 <a href="#getting-started" class="anchor"></a>Getting started</h2>
 <p>You will need to install the <code>devtools</code> CRAN package. All other dependencies will be automatically installed with the package installation.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Install devtools</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="co"># Install denoisingCTF</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">devtools<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/devtools/man/remote-reexports.html">install_github</a></span>(<span class="st">"msenosain/denoisingCTF"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Install devtools</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
+
+<span class="co"># Install denoisingCTF</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"msenosain/denoisingCTF"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="preparing-your-data" class="section level2">
 <h2 class="hasAnchor">
@@ -105,9 +106,14 @@
 <h2 class="hasAnchor">
 <a href="#denoising-cytof-data" class="anchor"></a>Denoising CyTOF data</h2>
 <p>The <code>rm_noise</code> function will remove zeros, beads and debris from the FCS files in the current working directory using previously trained models.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/rm_noise.html">rm_noise</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">denoisingCTF</span><span class="fu">::</span><span class="fu"><a href="../reference/rm_noise.html">rm_noise</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <p>After printing the list of column names with the index number, a first prompt will ask the user for the “mandatory” markers, which can be any marker that <em>should</em> be expressed in the cells (e.g. post-fixation DNA intercalator).</p>
-<pre><code>##       [,1]                       
+<pre><code>## Warning in readFCSdata(con, offsets, txt, transformation, which.lines, scale, : Some data values of 'Time' channel exceed its $PnR value 6076541 and will be truncated!
+##  To avoid truncation, either fix $PnR before generating FCS or set 'truncate_max_range = FALSE'
+## Warning in readFCSdata(con, offsets, txt, transformation, which.lines, scale, : Some data values of 'Event_length' channel exceed its $PnR value 50 and will be truncated!
+##  To avoid truncation, either fix $PnR before generating FCS or set 'truncate_max_range = FALSE'
+##       [,1]                       
 ##  [1,] "Time_Time"                
 ##  [2,] "Event_length_Event_length"
 ##  [3,] "Pd102Di_102Pd"            
@@ -239,10 +245,12 @@
 <h3 class="hasAnchor">
 <a href="#beads-model" class="anchor"></a>Beads model</h3>
 <p><strong>1. Build training and test datasets</strong> You should set up your working directory to the folder that contains your FCS files of interest.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span>(<span class="st">"~/Documents/My_CyTOF_Files"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">setwd</a></span><span class="op">(</span><span class="st">"~/Documents/My_CyTOF_Files"</span><span class="op">)</span></code></pre></div>
 <p>The <code>Beads_TrainTest</code> function will select a random sample from your FCS files (length specified in <code>sample_size</code> argument), and a promt will ask the user for the beads channels column indices.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/Beads_TrainTest.html">Beads_TrainTest</a></span>(<span class="dt">sample_size =</span> <span class="dv">20</span>, <span class="dt">method =</span> <span class="st">'k_means'</span>, </a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">    <span class="dt">bsample =</span> <span class="dv">5000</span>, <span class="dt">class_col =</span> <span class="st">'BeadsSmp_ID'</span>, ...)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">denoisingCTF</span><span class="fu">::</span><span class="fu"><a href="../reference/Beads_TrainTest.html">Beads_TrainTest</a></span><span class="op">(</span>sample_size <span class="op">=</span> <span class="fl">20</span>, method <span class="op">=</span> <span class="st">'k_means'</span>, 
+    bsample <span class="op">=</span> <span class="fl">5000</span>, class_col <span class="op">=</span> <span class="st">'BeadsSmp_ID'</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
 <pre><code>## Enter the column INDICES of the beads channels (separated by single space only, no comas allowed)</code></pre>
 <p>Then it will apply <em>arcsinh</em> tranformation (cofactor=5) and perform an unsupervised detection of the beads using a clustering method, which can be either by <em>k-means</em> or <em>Gaussian Mixture Models</em>. Clustering results will be evaluated and only the files in which the events identified as beads show a coefficient of variation (CV) &lt;0.05 will be selected to be part of the training and test sets. In all cases, the function writes a CSV file with the summary statistics, labeled <code>filename_beadsstats.csv</code> for a file that passed the test, or <code>filename__FAILEDbeadsstats.csv</code> for a file in which the clustering failed to identify the beads correctly.</p>
 <p>Since CyTOF experiments usually render a large number of events (sometimes more than a million) and we do not need that many events to train a model; the function will take a random sample of the files for which the clustering was successful. This will be a balanced sample, having <code>bsample</code> number of events per class. If <code>bsample</code> is larger than the amount of events available for that class then <code>replacement=TRUE</code>.</p>
@@ -259,9 +267,10 @@
 <code>test_nms</code>: a character vector with the names of the files used as they appear in <code>test_set</code>. Can be interpreted as row names of <code>test_set</code>.</li>
 </ul>
 <p><strong>2. Model training</strong> To train the new beads model use the <code>TrainModel</code> function. You can specify which algorithm to use in the argument <code>alg</code> (see <a href="https://msenosain.github.io/denoisingCTF/reference/TrainTest.html">documentation</a>) for details).</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/TrainModel.html">TrainModel</a></span>(train_set, test_set, <span class="dt">alg =</span> <span class="st">'all'</span>, <span class="dt">class_col =</span> <span class="st">'BeadsSmp_ID'</span>, </a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">    <span class="dt">seed =</span> <span class="dv">40</span>, <span class="dt">name_0 =</span> <span class="st">'cells'</span>, <span class="dt">name_1 =</span> <span class="st">'beads'</span>, <span class="dt">label =</span> <span class="st">'beads'</span>,</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">    <span class="dt">allowParallel =</span> T, <span class="dt">free_cores =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">denoisingCTF</span><span class="fu">::</span><span class="fu"><a href="../reference/TrainModel.html">TrainModel</a></span><span class="op">(</span><span class="va">train_set</span>, <span class="va">test_set</span>, alg <span class="op">=</span> <span class="st">'all'</span>, class_col <span class="op">=</span> <span class="st">'BeadsSmp_ID'</span>, 
+    seed <span class="op">=</span> <span class="fl">40</span>, name_0 <span class="op">=</span> <span class="st">'cells'</span>, name_1 <span class="op">=</span> <span class="st">'beads'</span>, label <span class="op">=</span> <span class="st">'beads'</span>,
+    allowParallel <span class="op">=</span> <span class="cn">T</span>, free_cores <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 <p>This function will write a <code>.RData</code> file that includes:</p>
 <ul>
 <li>
@@ -284,35 +293,30 @@
 <li>Removing beads (using beads model)</li>
 <li>Adding a row ID column</li>
 </ul>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/pre_gate.html">pre_gate</a></span>(<span class="dt">sample_size=</span><span class="dv">30</span>, <span class="dt">model_beads=</span>model_beads, <span class="dt">alg_bd =</span> <span class="st">'RF'</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">denoisingCTF</span><span class="fu">::</span><span class="fu"><a href="../reference/pre_gate.html">pre_gate</a></span><span class="op">(</span>sample_size<span class="op">=</span><span class="fl">30</span>, model_beads<span class="op">=</span><span class="va">model_beads</span>, alg_bd <span class="op">=</span> <span class="st">'RF'</span><span class="op">)</span></code></pre></div>
 <p>The function will write new FCS files in a folder called ‘toy_debris’. The user will then use their preferred strategy to “gate out” the debris and dead cells. Here we used <a href="http://cytoforum.stanford.edu/viewtopic.php?f=3&amp;t=709">Fluidigm</a> recommendations and our marker for intact cells:</p>
 <div class="figure">
-<img src="../inst/doc/figs/tutorial/tutorial_fig1.jpg" alt="Manual gating example" style="width:100.0%"><p class="caption"><strong>Manual gating example</strong></p>
+<img src="../inst/doc/figs/tutorial/tutorial_fig1.jpg" style="width:100.0%" alt=""><p class="caption"><strong>Manual gating example</strong></p>
 </div>
 <p>Once that is done, download your gated files (noise is already removed) into a new folder inside the ‘toy_debris’ directory. The <code>post_gate</code> function will compare pre- and post-gated files, label noise and generate training and test datasets. As explained above, <code>bsample</code> is the size of the random sample to be taken from each class. The function will write a <code>.RData</code> file with the same content explained above, but this time the class column will be named <code>GP_Noise</code>.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/post_gate.html">post_gate</a></span>(<span class="dt">bsample =</span> <span class="dv">5000</span>, <span class="dt">path_pregated =</span> <span class="st">'../'</span>) </a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">denoisingCTF</span><span class="fu">::</span><span class="fu"><a href="../reference/post_gate.html">post_gate</a></span><span class="op">(</span>bsample <span class="op">=</span> <span class="fl">5000</span>, path_pregated <span class="op">=</span> <span class="st">'../'</span><span class="op">)</span> </code></pre></div>
 <p><strong>2. Model training</strong></p>
 <p>This is exactly the same as for the beads model training but using as training features the channels you used to gate the noise out and changing some labels:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">denoisingCTF<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/denoisingCTF/man/TrainModel.html">TrainModel</a></span>(train_set, test_set, <span class="dt">alg =</span> <span class="st">'all'</span>, <span class="dt">class_col =</span> <span class="st">'GP_Noise'</span>, </a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">    <span class="dt">seed =</span> <span class="dv">40</span>, <span class="dt">name_0 =</span> <span class="st">'cells'</span>, <span class="dt">name_1 =</span> <span class="st">'debris'</span>, <span class="dt">label =</span> <span class="st">'debris'</span>, </a>
-<a class="sourceLine" id="cb14-3" data-line-number="3">    <span class="dt">allowParallel =</span> T, <span class="dt">free_cores =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu">denoisingCTF</span><span class="fu">::</span><span class="fu"><a href="../reference/TrainModel.html">TrainModel</a></span><span class="op">(</span><span class="va">train_set</span>, <span class="va">test_set</span>, alg <span class="op">=</span> <span class="st">'all'</span>, class_col <span class="op">=</span> <span class="st">'GP_Noise'</span>, 
+    seed <span class="op">=</span> <span class="fl">40</span>, name_0 <span class="op">=</span> <span class="st">'cells'</span>, name_1 <span class="op">=</span> <span class="st">'debris'</span>, label <span class="op">=</span> <span class="st">'debris'</span>, 
+    allowParallel <span class="op">=</span> <span class="cn">T</span>, free_cores <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#getting-started">Getting started</a></li>
-      <li><a href="#preparing-your-data">Preparing your data</a></li>
-      <li><a href="#denoising-cytof-data">Denoising CyTOF data</a></li>
-      <li><a href="#model-training">Model training</a></li>
-      </ul>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
 
@@ -323,7 +327,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
